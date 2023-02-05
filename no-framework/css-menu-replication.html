@@ -10,7 +10,7 @@
                 margin: 0;
                 font-family: Arial, Helvetica, sans-serif;
             }
-            .navbar
+            nav
             {
                 display: flex;
                 flex-direction: row;
@@ -21,12 +21,30 @@
             {
                 width: 100px;
             }
-            .dropdown-menu h3, .dropdown-content a
+            .dropdown-menu:hover, .dropdown-menu:focus-within
             {
+                background-color: rgba(39,196,64,255);
+            }
+            .dropdown-menu:hover .dropdown-content, .dropdown-menu:focus-within .dropdown-content
+            {
+                display: flex;
+                flex-direction: column;
+                background-color: rgba(39,196,64,255);
+            }
+            .dropdown-menu h3, .dropdown-menu label
+            {
+                font-size: large;
+            }
+            .dropdown-menu h3, .dropdown-menu label, .dropdown-content a
+            {
+                display: block;
                 margin: 0;
-                padding-left: 10px;
-                padding-top: 5px;
-                padding-bottom: 4px;
+                padding: 5px 10px;
+            }
+            .dropdown-menu input
+            {
+                position: absolute;
+                left: -200px;
             }
             .dropdown-content
             {
@@ -40,21 +58,12 @@
             {
                 background-color: rgba(39,255,64,255);
             }
-            .dropdown-menu:hover
-            {
-                background-color: rgba(39,196,64,255);
-            }
-            .dropdown-menu:hover .dropdown-content
-            {
-                display: flex;
-                flex-direction: column;
-                background-color: rgba(39,196,64,255);
-            }
         </style>
     </head>
 
     <body>
-        <div class="navbar">
+        <!-- Navigation bar at the top of the page -->
+        <nav>
             <div class="dropdown-menu">
                 <h3>File</h3>
                 <div class="dropdown-content">
@@ -67,7 +76,12 @@
             </div>
 
             <div class="dropdown-menu">
-                <h3>Edit</h3>
+                <label for="hidden-textbox">
+                    Edit
+                </label>
+                
+                <input id="hidden-textbox" type="text">
+                
                 <div class="dropdown-content">
                     <a href="">Undo</a>
                     <a href="">Redo</a>
@@ -94,10 +108,13 @@
                 </div>
             </div>
 
-        </div>
+        </nav>
+
+        <!-- Main area of the page -->
         <div class="main-content">
 
         </div>
+
     </body>
 
 </html>
