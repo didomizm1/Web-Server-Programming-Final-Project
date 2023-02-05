@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en-US">
+    <head>
+        <meta charset="utf-8">
+        <title>Menu Example</title>
+        <style>
+            body
+            {
+                background-color: rgba(220,250,230,255);
+                margin: 0;
+                font-family: Arial, Helvetica, sans-serif;
+            }
+            .navbar
+            {
+                display: flex;
+                flex-direction: row;
+                background-color: rgba(39,156,64,255);
+                height: 31px;
+            }
+            .dropdown-menu
+            {
+                width: 100px;
+            }
+            .dropdown-menu h3, .dropdown-content a
+            {
+                margin: 0;
+                padding-left: 10px;
+                padding-top: 5px;
+                padding-bottom: 4px;
+            }
+            .dropdown-content
+            {
+                display: none;
+            }
+            .dropdown-content a
+            {
+                text-decoration: none;
+            }
+            .dropdown-content a:hover
+            {
+                background-color: rgba(39,255,64,255);
+            }
+            .dropdown-menu:hover
+            {
+                background-color: rgba(39,196,64,255);
+            }
+            .dropdown-menu:hover .dropdown-content
+            {
+                display: flex;
+                flex-direction: column;
+                background-color: rgba(39,196,64,255);
+            }
+        </style>
+    </head>
+
+    <body>
+        <div class="navbar">
+            <div class="dropdown-menu">
+                <h3>File</h3>
+                <div class="dropdown-content">
+                    <a href="">New</a>
+                    <a href="">Open</a>
+                    <a href="">Save</a>
+                    <a href="">Print</a>
+                    <a href="">Close</a>
+                </div>
+            </div>
+
+            <div class="dropdown-menu">
+                <h3>Edit</h3>
+                <div class="dropdown-content">
+                    <a href="">Undo</a>
+                    <a href="">Redo</a>
+                    <a href="">Cut</a>
+                    <a href="">Copy</a>
+                    <a href="">Paste</a>
+                    <a href="">Delete</a>
+                    <a href="">Select All</a>
+                </div>
+            </div>
+
+            <div class="dropdown-menu">
+                <h3>View</h3>
+                <div class="dropdown-content">
+                    <a href="">Zoom In</a>
+                    <a href="">Zoom Out</a>
+                    <a href="">Actual Size</a>
+                    <a href="">Fit Page</a>
+                    <a href="">Fit Width</a>
+                    <a href="">Fit Height</a>
+                    <a href="">Rotate Left</a>
+                    <a href="">Rotate Right</a>
+                    <a href="">Full Screen</a>
+                </div>
+            </div>
+
+        </div>
+        <div class="main-content">
+
+        </div>
+    </body>
+
+</html>
