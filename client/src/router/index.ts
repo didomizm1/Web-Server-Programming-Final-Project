@@ -12,6 +12,11 @@ const router = createRouter({
   routes: [
     { path: '/home', name: 'home', component: HomeView },
     { path: '/about', name: 'about', component: AboutView },
+    { path: '/login', name: 'login', component: LoginView },
+    { path: '/register', name: 'register', component: RegisterView },
+    { path: '/profile', name: 'profile', component: ProfileView },
+    { path: '/exercises', name: 'exercises', component: ExercisesView },
+    { path: '/friends', name: 'friends', component: FriendsView }
   ]
 })
 
