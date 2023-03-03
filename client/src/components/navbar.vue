@@ -18,22 +18,35 @@ function toggleMenu() {
             <RouterLink to="/home" class="navbar-item">
                 <img src="@/assets/logos/sushifit-white-no-background.png" alt="SushiFit Logo" width="150">
             </RouterLink>
+
             <div class="navbar-burger" :class="{ 'is-active': isMenuActive }" @click="toggleMenu" >
                 <span></span>
                 <span></span>
                 <span></span>
             </div>
+
         </div>
     
         <div class="navbar-menu" :class="{ 'is-active': isMenuActive }">
             <div class="navbar-start">
-                <RouterLink to="/home" class="navbar-item">Home</RouterLink>
-                <RouterLink to="/about" class="navbar-item">About</RouterLink>
+                <RouterLink to="/home" class="navbar-item">
+                    <span class="icon">
+                        <i class="fas fa-home"></i>
+                    </span>
+                    <h1>Home</h1>
+                </RouterLink>
+                <RouterLink to="/about" class="navbar-item">
+                    <span class="icon">
+                        <i class="fas fa-book"></i>
+                    </span>
+                    <h1>About</h1>
+                </RouterLink>
             </div>
         
             <div class="navbar-end">
                 <LoginBadge />
             </div>
+            
         </div>
 
     </nav>
