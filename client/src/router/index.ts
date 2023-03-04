@@ -14,7 +14,7 @@ const router = createRouter({
     { path: '/home', name: 'home', component: HomeView },
     { path: '/about', name: 'about', component: AboutView },
     { path: '/faq', name: 'faq', component: FAQView },
-    { path: '/faq', name: 'faq', component: LoginView },
+    { path: '/login', name: 'login', component: LoginView },
     { path: '/register', name: 'register', component: RegisterView },
     { path: '/profile', name: 'profile', component: ProfileView },
     { path: '/exercises', name: 'exercises', component: ExercisesView },
