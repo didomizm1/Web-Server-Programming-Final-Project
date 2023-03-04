@@ -3,6 +3,7 @@ import { RouterLink } from 'vue-router';
 import { ref } from 'vue';
 import LoginBadge from './LoginBadge.vue';
 
+// Toggle navbar menu functionality for mobile devices
 const isMenuActive = ref(false);
 
 function toggleMenu() {
@@ -13,7 +14,9 @@ function toggleMenu() {
 </script>
 
 <template>
-    <nav class="navbar is-danger py-5">
+    <nav class="navbar is-danger">
+        
+        <!-- Logo and burger -->
         <div class="navbar-brand">
             <RouterLink to="/home" class="navbar-item">
                 <img src="@/assets/logos/sushifit-white-no-background.png" alt="SushiFit Logo" width="150">
@@ -26,7 +29,8 @@ function toggleMenu() {
             </div>
 
         </div>
-    
+
+        <!-- Links -->
         <div class="navbar-menu" :class="{ 'is-active': isMenuActive }">
             <div class="navbar-start">
                 <RouterLink to="/home" class="navbar-item">
@@ -48,7 +52,9 @@ function toggleMenu() {
                     <strong>FAQs</strong>
                 </RouterLink>
             </div>
-        
+            
+            <div class="py-6"></div> <!-- Empty div used only for navbar spacing purposes with Bulma -->
+
             <div class="navbar-end">
                 <LoginBadge />
             </div>
