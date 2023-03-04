@@ -33,13 +33,19 @@ function toggleMenu() {
                     <span class="icon">
                         <i class="fas fa-home"></i>
                     </span>
-                    <h1>Home</h1>
+                    <strong>Home</strong>
                 </RouterLink>
                 <RouterLink to="/about" class="navbar-item">
                     <span class="icon">
                         <i class="fas fa-book"></i>
                     </span>
-                    <h1>About</h1>
+                    <strong>About</strong>
+                </RouterLink>
+                <RouterLink to="/faqs" class="navbar-item">
+                    <span class="icon">
+                        <i class="fas fa-list"></i>
+                    </span>
+                    <strong>FAQs</strong>
                 </RouterLink>
             </div>
         
