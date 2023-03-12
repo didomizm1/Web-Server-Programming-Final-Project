@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { RouterLink } from 'vue-router';
 import { ref } from 'vue';
-import LoginBadge from '@/components/LoginBadge.vue';
+import LoginBadge from './LoginBadge.vue';
 
 // Toggle navbar menu functionality for mobile devices
 const isMenuActive = ref(false);
@@ -18,7 +18,7 @@ function toggleMenu() {
         <!-- Logo and burger -->
         <div class="navbar-brand">
             <RouterLink to="/home" class="navbar-item">
-                <img src="@/assets/logos/sushifit-white-no-background.png" alt="SushiFit Logo" width="150">
+                <img src="../assets/logos/sushifit-white-no-background.png" alt="SushiFit Logo" width="150">
             </RouterLink>
 
             <div class="navbar-burger" :class="{ 'is-active': isMenuActive }" @click="toggleMenu" >

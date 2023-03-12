@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import Banner from '@/components/Banner.vue';
-import CustomForm from '@/components/CustomForm.vue';
-import FormField from '@/components/FormField.vue';
+import Banner from '../components/Banner.vue';
+import CustomForm from '../components/CustomForm.vue';
+import FormField from '../components/FormField.vue';
 </script>
 
 <template>
@@ -62,7 +62,7 @@ import FormField from '@/components/FormField.vue';
   </CustomForm>
   
   <!-- Site logo on the bottom of the page -->
-  <img src="@/assets/logos/sushifit-high-resolution-color-logo.png" alt="SushiFit Logo: A new way to experience fitness.">
+  <img src="../assets/logos/sushifit-high-resolution-color-logo.png" alt="SushiFit Logo: A new way to experience fitness.">
   
 </template>
 
