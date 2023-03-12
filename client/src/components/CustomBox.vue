@@ -3,6 +3,7 @@
 </script>
 
 <template>
+    <!-- Colored box to contain other components -->
     <div class="container">
         <div class="box has-background-info-light">
             <slot></slot>
@@ -13,6 +14,5 @@
 <style scoped>
 .container {
     width: 60vw;
-    min-width: max-content;
 }
 </style>
