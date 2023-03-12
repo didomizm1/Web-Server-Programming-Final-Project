@@ -5,7 +5,7 @@ import FormField from '@/components/FormField.vue';
 </script>
 
 <template>
-<div>
+  <!-- Banner on the top of the page -->
   <Banner>
     <template #title>
       Welcome back!
@@ -15,6 +15,7 @@ import FormField from '@/components/FormField.vue';
     </template>
   </Banner>
   
+  <!-- Login form -->
   <CustomForm>
     <FormField>
         <template #label>
@@ -60,7 +61,9 @@ import FormField from '@/components/FormField.vue';
 
   </CustomForm>
   
-</div>
+  <!-- Site logo on the bottom of the page -->
+  <img src="@/assets/logos/sushifit-high-resolution-color-logo.png" alt="SushiFit Logo: A new way to experience fitness.">
+  
 </template>
 
 <style scoped>

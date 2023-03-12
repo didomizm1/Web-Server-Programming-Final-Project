@@ -15,7 +15,6 @@ function toggleMenu() {
 
 <template>
     <nav class="navbar is-danger">
-        
         <!-- Logo and burger -->
         <div class="navbar-brand">
             <RouterLink to="/home" class="navbar-item">

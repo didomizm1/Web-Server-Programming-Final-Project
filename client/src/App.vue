@@ -4,10 +4,11 @@ import Navbar from '@/components/Navbar.vue';
 </script>
 
 <template>
+  <!-- Navbar on the top of the page -->
   <Navbar />
 
+  <!-- Columns of the page -->
   <div class="columns is-centered is-gapless">
-
     <div class="column side-column"></div> 
 
     <div class="column is-8">
@@ -23,7 +24,7 @@ import Navbar from '@/components/Navbar.vue';
 </template>
 
 <style scoped>
-  .side-column {
-    background-image: url("./assets/backgrounds/wood_texture.jpg");
-  }
+.side-column {
+  background-image: url("./assets/backgrounds/wood_texture.jpg");
+}
 </style>
