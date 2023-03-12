@@ -1,14 +1,14 @@
 <script setup lang="ts">
 import { RouterLink } from 'vue-router';
 import { ref } from 'vue';
-import LoginBadge from './LoginBadge.vue';
+import LoginBadge from '@/components/LoginBadge.vue';
 
 // Toggle navbar menu functionality for mobile devices
 const isMenuActive = ref(false);
 
 function toggleMenu() {
     isMenuActive.value = !isMenuActive.value;
-    console.log({ isMenuActive })
+    console.log({ isMenuActive });
 }
 
 </script>
