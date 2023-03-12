@@ -1,36 +1,63 @@
 <script setup lang="ts">
-
+import Banner from '@/components/Banner.vue';
+import CustomForm from '@/components/CustomForm.vue';
+import FormField from '@/components/FormField.vue';
 </script>
 
 <template>
 <div>
-  <section class="hero has-background-danger-dark my-6">
-    <div class="hero-body">
-      <div class="container has-text-centered">
-        <p class="title">
-          Welcome back!
-        </p>
-      </div>
-
-    </div>
-  </section>
+  <Banner>
+    Welcome back!
+  </Banner>
   
-  <div class="container form">
-    <div class="box">
-      
+  <CustomForm>
+    <FormField>
+        <template #label>
+          Username
+        </template>
 
-    </div>
-  </div>
+        <template #input>
+          <input class="input" type="text" placeholder="Input username">
+        </template>
+
+        <template #leftIcon>
+          <i class="fas fa-user"></i>
+        </template>
+        <template #rightIcon>
+          <i class="fas fa-check"></i>
+        </template>
+
+        <template #help>
+          Valid username
+        </template>
+
+    </FormField>
+    <FormField>
+      <template #label>
+        Password
+      </template>
+
+      <template #input>
+        <input class="input" type="password" placeholder="Input password">
+      </template>
+
+      <template #leftIcon>
+        <i class="fas fa-lock"></i>
+      </template>
+      <template #rightIcon>
+        <i class="fas fa-check"></i>
+      </template>
+
+      <template #help>
+        Valid password
+      </template>
+    </FormField>
+
+  </CustomForm>
   
 </div>
 </template>
 
 <style scoped>
-.title {
-  font-family: 'SF Wasabi', sans-serif;
-  font-size: 3rem;
-}
-.form {
-  width: 50rem;
-}
+
 </style>
