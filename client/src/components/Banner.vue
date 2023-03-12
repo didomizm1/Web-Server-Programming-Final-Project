@@ -7,7 +7,10 @@
         <div class="hero-body">
             <div class="container has-text-centered">
                 <p class="title">
-                    <slot></slot>
+                    <slot name="title"></slot>
+                </p>
+                <p class="subtitle">
+                    <slot name="subtitle"></slot>
                 </p>
             </div>
         </div>
@@ -16,7 +19,11 @@
 
 <style scoped>
 .title {
-  font-family: 'SF Wasabi', sans-serif;
-  font-size: 3rem;
+    font-family: 'SF Wasabi', sans-serif;
+    font-size: 3rem;
+}
+.subtitle {
+    font-family: 'Japanese Brush', sans-serif;
+    font-size: 1.5rem;
 }
 </style>

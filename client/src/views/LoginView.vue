@@ -7,7 +7,12 @@ import FormField from '@/components/FormField.vue';
 <template>
 <div>
   <Banner>
-    Welcome back!
+    <template #title>
+      Welcome back!
+    </template>
+    <template #subtitle>
+      Log in below.
+    </template>
   </Banner>
   
   <CustomForm>
