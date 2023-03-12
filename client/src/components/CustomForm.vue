@@ -3,7 +3,7 @@ import CustomBox from './CustomBox.vue';
 </script>
 
 <template>
-    <div class="container form">
+    <div class="form">
         <CustomBox>
             <slot></slot>
         </CustomBox>
@@ -11,8 +11,5 @@ import CustomBox from './CustomBox.vue';
 </template>
 
 <style scoped>
-.form {
-    width: 60vw;
-    min-width: max-content;
-}
+
 </style>
