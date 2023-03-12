@@ -17,7 +17,7 @@ function toggleMenu() {
     <nav class="navbar is-danger">
         <!-- Logo and burger -->
         <div class="navbar-brand">
-            <RouterLink to="/home" class="navbar-item">
+            <RouterLink to="/" class="navbar-item">
                 <img src="../assets/logos/sushifit-white-no-background.png" alt="SushiFit Logo" width="150">
             </RouterLink>
 
@@ -32,7 +32,7 @@ function toggleMenu() {
         <!-- Links -->
         <div class="navbar-menu" :class="{ 'is-active': isMenuActive }">
             <div class="navbar-start">
-                <RouterLink to="/home" class="navbar-item">
+                <RouterLink to="/" class="navbar-item">
                     <span class="icon">
                         <i class="fas fa-home"></i>
                     </span>
