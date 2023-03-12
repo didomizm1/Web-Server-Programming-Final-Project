@@ -3,6 +3,7 @@
 </script>
 
 <template>
+    <!-- Outline of a field to be used inside of a form -->
     <div class="field">
         <label class="label">
             <slot name="label"></slot>

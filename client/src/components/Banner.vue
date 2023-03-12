@@ -3,6 +3,7 @@
 </script>
 
 <template>
+    <!-- Banner to be used on top of the page -->
     <section class="hero has-background-danger-dark my-6">
         <div class="hero-body">
             <div class="container has-text-centered">

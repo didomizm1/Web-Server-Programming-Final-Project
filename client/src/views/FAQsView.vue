@@ -5,12 +5,14 @@ import QuestionAnswer from '../components/QuestionAnswer.vue';
 </script>
 
 <template>
+  <!-- Banner on the top of the page -->
   <Banner>
     <template #title>
       Frequently Asked Questions
     </template>
   </Banner>
 
+  <!-- Set of questions and their corresponding answers -->
   <CustomBox>
     <div class="content">
       <QuestionAnswer>
