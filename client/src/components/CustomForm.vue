@@ -1,17 +1,17 @@
 <script setup lang="ts">
-
+import CustomBox from './CustomBox.vue';
 </script>
 
 <template>
     <div class="container form">
-        <div class="box">
+        <CustomBox>
             <slot></slot>
-        </div>
+        </CustomBox>
     </div>
 </template>
 
 <style scoped>
-.form, .box {
+.form {
     width: 60vw;
     min-width: max-content;
 }
