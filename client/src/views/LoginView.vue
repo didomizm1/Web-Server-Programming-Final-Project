@@ -2,6 +2,7 @@
 import Banner from '../components/Banner.vue';
 import CustomForm from '../components/CustomForm.vue';
 import FormField from '../components/FormField.vue';
+import PopupMessage from '../components/PopupMessage.vue';
 </script>
 
 <template>
@@ -67,12 +68,22 @@ import FormField from '../components/FormField.vue';
       </template>
 
       <template #input>
-        <button class="button">Log In</button>
+        <button class="button"><strong>Log In</strong></button>
       </template>
-      
+
     </FormField>
 
   </CustomForm>
+
+  <!-- Message to advertise registration -->
+  <PopupMessage>
+    <template #header>
+      Don't have an account?
+    </template>
+    <template #body>
+      Click the sign up button to register for an account on SushiFit today!
+    </template>
+  </PopupMessage>
   
   <!-- Site logo on the bottom of the page -->
   <img src="../assets/logos/sushifit-high-resolution-color-logo.png" alt="SushiFit Logo: A new way to experience fitness.">
