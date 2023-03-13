@@ -4,7 +4,7 @@ import CustomBox from './CustomBox.vue';
 
 <template>
     <!-- Custom form component -->
-    <div class="form">
+    <div class="form block">
         <CustomBox>
             <slot></slot>
         </CustomBox>

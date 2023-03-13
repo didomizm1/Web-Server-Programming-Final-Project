@@ -14,5 +14,6 @@
 <style scoped>
 .container {
     width: 60vw;
+    min-width: 21.375rem;
 }
 </style>
