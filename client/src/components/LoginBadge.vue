@@ -3,6 +3,7 @@
 </script>
 
 <template>
+    <!-- Holds button links to pages related to logging in and registering -->
     <RouterLink to="/login" class="navbar-item">
         <span class="icon">
             <i class="fas fa-user"></i>
@@ -14,7 +15,7 @@
         <span class="icon">
             <i class="fas fa-user-plus"></i>
         </span>
-        <strong>Register</strong>
+        <strong>Sign Up</strong>
     </RouterLink>
     
 </template>
