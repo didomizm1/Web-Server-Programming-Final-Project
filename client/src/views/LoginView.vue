@@ -38,6 +38,7 @@ import FormField from '../components/FormField.vue';
         </template>
 
     </FormField>
+
     <FormField>
       <template #label>
         Password
@@ -57,6 +58,18 @@ import FormField from '../components/FormField.vue';
       <template #help>
         Valid password
       </template>
+
+    </FormField>
+
+    <FormField>
+      <template #label>
+        Submit
+      </template>
+
+      <template #input>
+        <button class="button">Log In</button>
+      </template>
+      
     </FormField>
 
   </CustomForm>
