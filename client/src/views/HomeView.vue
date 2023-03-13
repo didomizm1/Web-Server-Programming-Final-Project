@@ -1,9 +1,10 @@
 <script setup lang="ts">
-
+import SiteLogo from '../components/SiteLogo.vue';
 </script>
 
 <template>
-  <img src="../assets/logos/sushifit-high-resolution-color-logo.png" alt="SushiFit Logo: A new way to experience fitness.">
+    <!-- Site logo -->
+    <SiteLogo />
 </template>
 
 <style scoped>

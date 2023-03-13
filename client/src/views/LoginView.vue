@@ -3,6 +3,7 @@ import Banner from '../components/Banner.vue';
 import CustomForm from '../components/CustomForm.vue';
 import FormField from '../components/FormField.vue';
 import PopupMessage from '../components/PopupMessage.vue';
+import SiteLogo from '../components/SiteLogo.vue';
 </script>
 
 <template>
@@ -86,7 +87,7 @@ import PopupMessage from '../components/PopupMessage.vue';
   </PopupMessage>
   
   <!-- Site logo on the bottom of the page -->
-  <img src="../assets/logos/sushifit-high-resolution-color-logo.png" alt="SushiFit Logo: A new way to experience fitness.">
+  <SiteLogo />
   
 </template>
 
