@@ -35,10 +35,6 @@ import SiteLogo from '../components/SiteLogo.vue';
           <i class="fas fa-check"></i>
         </template>
 
-        <template #help>
-          Valid username
-        </template>
-
     </FormField>
 
     <FormField>
@@ -57,10 +53,6 @@ import SiteLogo from '../components/SiteLogo.vue';
         <i class="fas fa-check"></i>
       </template>
 
-      <template #help>
-        Valid password
-      </template>
-
     </FormField>
 
     <FormField>
@@ -70,6 +62,10 @@ import SiteLogo from '../components/SiteLogo.vue';
 
       <template #input>
         <button class="button"><strong>Log In</strong></button>
+      </template>
+
+      <template #error>
+        Invalid username or password
       </template>
 
     </FormField>
