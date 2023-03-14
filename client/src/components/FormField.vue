@@ -13,12 +13,18 @@
             <span class="icon is-left">
                 <slot name="leftIcon"></slot>
             </span>
-            <span class="icon is-right">
+            <span class="icon is-right is-hidden">
                 <slot name="rightIcon"></slot>
             </span>
         </div>
-        <p class="help is-success is-hidden">
+        <p class="help">
             <slot name="help"></slot>
+        </p>
+        <p class="help is-success is-hidden">
+            <slot name="success"></slot>
+        </p>
+        <p class="help is-danger is-hidden">
+            <slot name="error"></slot>
         </p>
     </div>
 </template>
