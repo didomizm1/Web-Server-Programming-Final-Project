@@ -13,7 +13,8 @@
 
 <style scoped>
 .container {
-    width: 60vw;
-    min-width: 21.375rem;
+    margin-left: 3rem;
+    margin-right: 3rem;
+    min-width: fit-content;
 }
 </style>
