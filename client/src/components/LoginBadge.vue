@@ -13,6 +13,14 @@ const logout = useLogout(); // Lagout function
         <div class="navbar-item">
             Welcome, {{ session.user.username }}!
         </div>
+
+        <RouterLink class="navbar-item" to="/profile">
+            <span class="icon">
+                <i class="fas fa-user-gear"></i>
+            </span>
+            <strong>Profile</strong>
+        </RouterLink>
+
         <!-- This RouterLink is used for consistency in styling -->
         <RouterLink class="navbar-item" to="" @click="logout()">
             <span class="icon">
@@ -20,6 +28,7 @@ const logout = useLogout(); // Lagout function
             </span>
             <strong>Log Out</strong>
         </RouterLink>
+
     </template>
 
     <!-- Only shown if user is logged out -->
