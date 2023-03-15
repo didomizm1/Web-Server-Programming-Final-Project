@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { RouterView } from 'vue-router';
 import Navbar from './components/Navbar.vue';
+import FooterNav from './components/FooterNav.vue';
 </script>
 
 <template>
@@ -8,7 +9,7 @@ import Navbar from './components/Navbar.vue';
   <Navbar />
 
   <!-- Columns of the page -->
-  <div class="columns is-centered is-gapless">
+  <div class="columns is-centered is-gapless mb-0">
     <div class="column side-column"></div> 
 
     <div class="column is-8">
@@ -20,6 +21,9 @@ import Navbar from './components/Navbar.vue';
     <div class="column side-column"></div>
 
   </div>
+
+  <!-- Footer on the bottom of the page -->
+  <FooterNav />
   
 </template>
 
