@@ -8,6 +8,8 @@ import ProfileView from '../views/ProfileView.vue'
 import ExercisesView from '../views/ExercisesView.vue'
 import MealsView from '../views/MealsView.vue'
 import FriendsView from '../views/FriendsView.vue'
+import UserSearchView from '../views/UserSearchView.vue'
+import StatisticsView from '../views/StatisticsView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -20,7 +22,9 @@ const router = createRouter({
     { path: '/profile', name: 'profile', component: ProfileView },
     { path: '/exercises', name: 'exercises', component: ExercisesView },
     { path: '/meals', name: 'meals', component: MealsView },
-    { path: '/friends', name: 'friends', component: FriendsView }
+    { path: '/friends', name: 'friends', component: FriendsView },
+    { path: '/user-search', name: 'user-search', component: UserSearchView },
+    { path: '/statistics', name: 'statistics', component: StatisticsView },
   ]
 })
 
