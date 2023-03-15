@@ -34,12 +34,13 @@ export function login() {
     }
 }
 
-// Logout function, redirects to login page
+// Logout function
 export function useLogout() {
     const router = useRouter()
 
-    return function(){
-        console.log({router});
+    // Sets user to null and redirects to login page
+    return function() {
+        console.log({ router });
         session.user = null;
         router.push("/login");
     }

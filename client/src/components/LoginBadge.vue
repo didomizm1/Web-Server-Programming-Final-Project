@@ -1,23 +1,45 @@
 <script setup lang="ts">
+import { useSession, useLogout } from '../model/session';
 
+const session = useSession(); // Reactive session object
+const logout = useLogout(); // Lagout function
 </script>
 
 <template>
-    <!-- Holds button links to pages related to logging in and registering -->
-    <RouterLink to="/login" class="navbar-item">
-        <span class="icon">
-            <i class="fas fa-user"></i>
-        </span>
-        <strong>Log In</strong>
-    </RouterLink>
-    
-    <RouterLink to="/register" class="navbar-item">
-        <span class="icon">
-            <i class="fas fa-user-plus"></i>
-        </span>
-        <strong>Sign Up</strong>
-    </RouterLink>
-    
+    <!-- Holds links to pages which relate to login status, registration, and accounts -->
+
+    <!-- Only shown if user is logged in -->
+    <template v-if="session.user">
+        <div class="navbar-item">
+            Welcome, {{ session.user.username }}!
+        </div>
+        <!-- This RouterLink is used for consistency in styling -->
+        <RouterLink class="navbar-item" to="" @click="logout()">
+            <span class="icon">
+                <i class="fas fa-door-open"></i>
+            </span>
+            <strong>Log Out</strong>
+        </RouterLink>
+    </template>
+
+    <!-- Only shown if user is logged out -->
+    <template v-else>
+        <RouterLink class="navbar-item" to="/login">
+            <span class="icon">
+                <i class="fas fa-user"></i>
+            </span>
+            <strong>Log In</strong>
+        </RouterLink>
+        
+        <RouterLink class="navbar-item" to="/register">
+            <span class="icon">
+                <i class="fas fa-user-plus"></i>
+            </span>
+            <strong>Sign Up</strong>
+        </RouterLink>
+
+    </template>
+
 </template>
 
 <style scoped>

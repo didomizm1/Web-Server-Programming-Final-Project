@@ -21,7 +21,7 @@ function toggleMenu() {
                 <img src="../assets/logos/sushifit-white-no-background.png" alt="SushiFit Logo" width="150">
             </RouterLink>
 
-            <div class="navbar-burger" :class="{ 'is-active': isMenuActive }" @click="toggleMenu" >
+            <div class="navbar-burger" :class="{ 'is-active': isMenuActive }" @click="toggleMenu()">
                 <span></span>
                 <span></span>
                 <span></span>

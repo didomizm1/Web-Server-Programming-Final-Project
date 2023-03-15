@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { login } from '../model/session';
 import Banner from '../components/Banner.vue';
 import CustomForm from '../components/CustomForm.vue';
 import FormField from '../components/FormField.vue';
@@ -61,9 +62,12 @@ import SiteLogo from '../components/SiteLogo.vue';
       </template>
 
       <template #input>
-        <button class="button"><strong>Log In</strong></button>
+        <button class="button" @click="login()"><strong>Log In</strong></button>
       </template>
 
+      <template #help>
+        *Temporarily use this login button without any information to gain access to a test account
+      </template>
       <template #error>
         Invalid username or password
       </template>
