@@ -3,6 +3,7 @@ import { RouterLink } from 'vue-router';
 import { ref } from 'vue';
 import { useSession } from '../model/session';
 import LoginBadge from './LoginBadge.vue';
+import NavLogo from './NavLogo.vue';
 
 // Reactive session object
 const session = useSession();
@@ -22,7 +23,7 @@ function toggleMenu() {
         <!-- Logo and burger -->
         <div class="navbar-brand">
             <RouterLink class="navbar-item" to="/">
-                <img src="../assets/logos/sushifit-white-no-background.png" alt="SushiFit Logo" width="150">
+                <NavLogo />
             </RouterLink>
 
             <div class="navbar-burger" :class="{ 'is-active': isMenuActive }" @click="toggleMenu()">
@@ -76,19 +77,6 @@ function toggleMenu() {
                         <strong>Statistics</strong>
                     </RouterLink>
                 </template>
-
-                <RouterLink class="navbar-item" to="/about">
-                    <span class="icon">
-                        <i class="fas fa-book"></i>
-                    </span>
-                    <strong>About</strong>
-                </RouterLink>
-                <RouterLink class="navbar-item" to="/faqs">
-                    <span class="icon">
-                        <i class="fas fa-list"></i>
-                    </span>
-                    <strong>FAQs</strong>
-                </RouterLink>
 
             </div>
             
