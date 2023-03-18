@@ -1,10 +1,13 @@
 <script setup lang="ts">
-import { login } from '../model/session';
+import { useLogin } from '../model/session';
 import Banner from '../components/Banner.vue';
 import CustomForm from '../components/CustomForm.vue';
 import FormField from '../components/FormField.vue';
 import PopupMessage from '../components/PopupMessage.vue';
 import SiteLogo from '../components/SiteLogo.vue';
+
+// Login function
+const login = useLogin();
 </script>
 
 <template>

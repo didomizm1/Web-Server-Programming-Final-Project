@@ -23,14 +23,21 @@ export function useSession() {
 }
 
 // Login function
-export function login() {
-    session.user = {
-        userID: 0,
-        username: "testuser",
-        email: "testemail@email.com",
-        firstName: "Test",
-        lastName: "User",
-        birthday: "0/0/0000",
+export function useLogin() {
+    const router = useRouter();
+
+    // Assigns values to a user's properties and redirects to the home page
+    return function() {
+        console.log({ router });
+        session.user = {
+            userID: 0,
+            username: "testuser",
+            email: "testemail@email.com",
+            firstName: "Test",
+            lastName: "User",
+            birthday: "0/0/0000",
+        }
+        router.push("/");
     }
 }
 
