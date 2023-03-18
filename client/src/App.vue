@@ -29,6 +29,6 @@ import FooterNav from './components/FooterNav.vue';
 
 <style scoped>
 .side-column {
-  background-image: url("./assets/backgrounds/wood_texture.jpg");
+  background-image: url("./assets/backgrounds/wood-texture.jpg");
 }
 </style>

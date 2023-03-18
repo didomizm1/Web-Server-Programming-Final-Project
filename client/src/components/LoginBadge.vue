@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { useSession, useLogout } from '../model/session';
+import ProfilePicture from './ProfilePicture.vue';
 
 const session = useSession(); // Reactive session object
 const logout = useLogout(); // Lagout function
@@ -10,6 +11,8 @@ const logout = useLogout(); // Lagout function
 
     <!-- Only shown if user is logged in -->
     <template v-if="session.user">
+        <ProfilePicture class="picture" />
+        
         <div class="navbar-item">
             Welcome, {{ session.user.username }}!
         </div>
@@ -51,5 +54,8 @@ const logout = useLogout(); // Lagout function
 </template>
 
 <style scoped>
-
+.picture {
+    margin-top: 1.125rem;
+    margin-left: 1rem;
+}
 </style>

@@ -36,7 +36,7 @@ import SiteLogo from '../components/SiteLogo.vue';
         </template>
 
         <template #help>
-          Must contain at least 8 characters (letters or numbers only) 
+          Must be between 8 and 16 characters long (letters or numbers only)
         </template>
         <template #success>
           Valid username
