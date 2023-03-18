@@ -55,6 +55,8 @@ const logout = useLogout(); // Lagout function
 
 <style scoped>
 .picture {
+    width: 3.75rem;
+    height: 3.75rem;
     margin-top: 1.125rem;
     margin-left: 1rem;
 }

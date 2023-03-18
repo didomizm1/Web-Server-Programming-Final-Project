@@ -10,8 +10,5 @@
 </template>
 
 <style scoped>
-.image {
-    width: 3.75rem;
-    height: 3.75rem;
-}
+
 </style>
