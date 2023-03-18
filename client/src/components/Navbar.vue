@@ -70,13 +70,13 @@ function toggleDropdown() {
                                 </span>
                                 <strong>Exercises</strong>
                             </RouterLink>
-                            <RouterLink class="navbar-item" to="/meals">
+                            <RouterLink class="navbar-item mt-2" to="/meals">
                                 <span class="icon">
                                     <i class="fas fa-bowl-rice"></i>
                                 </span>
                                 <strong>Meals</strong>
                             </RouterLink>
-                            <RouterLink class="navbar-item" to="/statistics">
+                            <RouterLink class="navbar-item mt-2 mb-1" to="/statistics">
                                 <span class="icon">
                                     <i class="fas fa-chart-column"></i>
                                 </span>
