@@ -21,13 +21,12 @@ const logout = useLogout(); // Lagout function
             <strong>Profile</strong>
         </RouterLink>
 
-        <!-- This RouterLink is used for consistency in styling -->
-        <RouterLink class="navbar-item" to="" @click="logout()">
+        <a class="navbar-item" @click="logout()">
             <span class="icon">
                 <i class="fas fa-door-open"></i>
             </span>
             <strong>Log Out</strong>
-        </RouterLink>
+        </a>
 
     </template>
 

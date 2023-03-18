@@ -16,6 +16,14 @@ function toggleMenu() {
     console.log({ isMenuActive });
 }
 
+// Toggle dropdown menu
+const isDropdownActive = ref(false);
+
+function toggleDropdown() {
+    isDropdownActive.value = !isDropdownActive.value;
+    console.log({ isDropdownActive });
+}
+
 </script>
 
 <template>
@@ -43,40 +51,56 @@ function toggleMenu() {
                     </span>
                     <strong>Home</strong>
                 </RouterLink>
-                <RouterLink class="navbar-item" to="/user-search">
-                    <span class="icon">
-                        <i class="fas fa-search"></i>
-                    </span>
-                    <strong>User Search</strong>
-                </RouterLink>
 
                 <!-- Links only available to logged in users -->
                 <template v-if="session.user">
+
+                    <div class="navbar-item has-dropdown" :class="{ 'is-active': isDropdownActive }" @click="toggleDropdown()">
+                        <a class="navbar-link">
+                            <span class="icon">
+                                <i class="fas fa-person-running"></i>
+                            </span>
+                            <strong>My Activity</strong>
+                        </a>
+
+                        <div class="navbar-dropdown">
+                            <RouterLink class="navbar-item" to="/exercises">
+                                <span class="icon">
+                                    <i class="fas fa-person-skating"></i>
+                                </span>
+                                <strong>Exercises</strong>
+                            </RouterLink>
+                            <RouterLink class="navbar-item" to="/meals">
+                                <span class="icon">
+                                    <i class="fas fa-bowl-rice"></i>
+                                </span>
+                                <strong>Meals</strong>
+                            </RouterLink>
+                            <RouterLink class="navbar-item" to="/statistics">
+                                <span class="icon">
+                                    <i class="fas fa-chart-column"></i>
+                                </span>
+                                <strong>Statistics</strong>
+                            </RouterLink>
+                        </div>
+
+                    </div>
+
                     <RouterLink class="navbar-item" to="/friends">
                         <span class="icon">
                             <i class="fas fa-users"></i>
                         </span>
                         <strong>Friends</strong>
                     </RouterLink>
-                    <RouterLink class="navbar-item" to="/exercises">
-                        <span class="icon">
-                            <i class="fas fa-person-skating"></i>
-                        </span>
-                        <strong>Exercises</strong>
-                    </RouterLink>
-                    <RouterLink class="navbar-item" to="/meals">
-                        <span class="icon">
-                            <i class="fas fa-bowl-rice"></i>
-                        </span>
-                        <strong>Meals</strong>
-                    </RouterLink>
-                    <RouterLink class="navbar-item" to="/statistics">
-                        <span class="icon">
-                            <i class="fas fa-chart-column"></i>
-                        </span>
-                        <strong>Statistics</strong>
-                    </RouterLink>
+                    
                 </template>
+
+                <RouterLink class="navbar-item" to="/user-search">
+                    <span class="icon">
+                        <i class="fas fa-search"></i>
+                    </span>
+                    <strong>User Search</strong>
+                </RouterLink>
 
             </div>
             
