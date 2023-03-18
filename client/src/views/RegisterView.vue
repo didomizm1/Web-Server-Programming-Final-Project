@@ -75,6 +75,8 @@ import SiteLogo from '../components/SiteLogo.vue';
 
     </FormField>
 
+    <br>
+
     <FormField>
       <template #label>
         E-mail
@@ -99,6 +101,8 @@ import SiteLogo from '../components/SiteLogo.vue';
       </template>
 
     </FormField>
+
+    <br>
 
     <FormField>
       <template #label>
@@ -153,6 +157,8 @@ import SiteLogo from '../components/SiteLogo.vue';
       </template>
 
     </FormField>
+
+    <br>
 
     <FormField>
       <template #label>
