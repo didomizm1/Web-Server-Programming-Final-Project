@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import Banner from '../components/Banner.vue';
-import CustomBox from '../components/CustomBox.vue';
+import PageBox from '../components/PageBox.vue';
 import QuestionAnswer from '../components/QuestionAnswer.vue';
 </script>
 
@@ -13,7 +13,7 @@ import QuestionAnswer from '../components/QuestionAnswer.vue';
   </Banner>
 
   <!-- Set of questions and their corresponding answers -->
-  <CustomBox>
+  <PageBox>
     <div class="content">
       <QuestionAnswer>
         <template #q>
@@ -70,7 +70,7 @@ import QuestionAnswer from '../components/QuestionAnswer.vue';
       </QuestionAnswer>
 
     </div>
-  </CustomBox>
+  </PageBox>
 
 </template>
 

@@ -1,13 +1,13 @@
 <script setup lang="ts">
-import CustomBox from './CustomBox.vue';
+import PageBox from './PageBox.vue';
 </script>
 
 <template>
     <!-- Custom form component -->
     <div class="form block">
-        <CustomBox>
+        <PageBox>
             <slot></slot>
-        </CustomBox>
+        </PageBox>
     </div>
 </template>
 

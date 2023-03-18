@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import Banner from '../components/Banner.vue';
-import CustomBox from '../components/CustomBox.vue';
+import PageBox from '../components/PageBox.vue';
 import QuestionAnswer from '../components/QuestionAnswer.vue';
 </script>
 
@@ -13,7 +13,7 @@ import QuestionAnswer from '../components/QuestionAnswer.vue';
   </Banner>
 
   <!-- Main text content of the about page -->
-  <CustomBox>
+  <PageBox>
     <div class="content">
       <QuestionAnswer>
         <template #q>
@@ -24,7 +24,7 @@ import QuestionAnswer from '../components/QuestionAnswer.vue';
         </template>
       </QuestionAnswer>
     </div>
-  </CustomBox>
+  </PageBox>
 
 </template>
 
