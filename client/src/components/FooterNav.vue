@@ -10,19 +10,19 @@ import NavLogo from './NavLogo.vue';
                 <NavLogo />
             </RouterLink>
 
-            <RouterLink class="level-item has-text-grey-lighter" to="/">
+            <RouterLink class="level-item has-text-grey-lighter mt-5" to="/">
                 <span class="icon">
                     <i class="fas fa-home"></i>
                 </span>
                 <strong>Home</strong>
             </RouterLink>
-            <RouterLink class="level-item has-text-grey-lighter" to="/about">
+            <RouterLink class="level-item has-text-grey-lighter mt-5" to="/about">
                 <span class="icon">
                     <i class="fas fa-book"></i>
                 </span>
                 <strong>About</strong>
             </RouterLink>
-            <RouterLink class="level-item has-text-grey-lighter" to="/faqs">
+            <RouterLink class="level-item has-text-grey-lighter mt-5" to="/faqs">
                 <span class="icon">
                     <i class="fas fa-list"></i>
                 </span>
