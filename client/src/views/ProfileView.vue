@@ -1,10 +1,48 @@
 <script setup lang="ts">
-import { RouterLink } from 'vue-router';
+import { ref } from 'vue';
 import { useSession } from '../model/session';
 import ProfilePicture from '../components/ProfilePicture.vue';
+import CustomLevel from '../components/CustomLevel.vue';
+import CustomForm from '../components/CustomForm.vue';
+import FormField from '../components/FormField.vue';
+import FileFormField from '../components/FileFormField.vue';
 
 // Reactive session object
 const session = useSession();
+
+// Edit profile form modal functionality
+const isModalActive = ref(false);
+
+function toggleModal() {
+  isModalActive.value = !isModalActive.value;
+  console.log({ isModalActive });
+}
+
+// Reset values in the modal to their defaults
+const usernameDefault = ref(session.user?.username);
+const emailDefault = ref(session.user?.email);
+const firstNameDefault = ref(session.user?.firstName);
+const lastNameDefault = ref(session.user?.lastName);
+const birthdayDefault = ref(session.user?.birthday);
+
+function resetValues() {
+  usernameDefault.value = "";
+  usernameDefault.value = session.user?.username;
+  emailDefault.value = "";
+  emailDefault.value = session.user?.email;
+  firstNameDefault.value = "";
+  firstNameDefault.value = session.user?.firstName;
+  lastNameDefault.value = "";
+  lastNameDefault.value = session.user?.lastName;
+  birthdayDefault.value = "";
+  birthdayDefault.value = session.user?.birthday;
+}
+
+// Update profile data when save button is clicked
+function updateData() {
+  
+}
+
 </script>
 
 <template>
@@ -24,68 +62,226 @@ const session = useSession();
       </div>
 
       <!-- Join date -->
-      <nav class="level mt-4">
-        <div class="level-item">
-          <p class="title date-text">Joined 3/18/2023</p>
-        </div>
-      </nav>
+      <CustomLevel class="mt-4">
+        <p class="title date-text">Joined 3/18/2023</p>
+      </CustomLevel>
 
       <!-- Horizontal Divider -->
       <hr>
 
       <!-- Number of friends, exercises, and meals -->
-      <nav class="level mt-6">
-        <div class="level-item">
-          <table class="table is-bordered is-hoverable">
-            <tr>
-              <td>
-                <span class="icon"><i class="fas fa-users"></i></span>
-                <span class="title table-text ml-2">0 Friends</span>
-              </td>
-              <td>
-                <span class="icon"><i class="fas fa-person-skating"></i></span>
-                <span class="title table-text ml-2">0 Exercises</span>
-              </td>
-              <td>
-                <span class="icon"><i class="fas fa-bowl-rice"></i></span>
-                <span class="title table-text ml-2">0 Meals</span>
-              </td>
-            </tr>   
-          </table>
-        </div>
-      </nav>
+      <CustomLevel class="mt-6">
+        <table class="table is-bordered is-hoverable">
+          <tr>
+            <td>
+              <span class="icon"><i class="fas fa-users"></i></span>
+              <span class="title table-text ml-2">0 Friends</span>
+            </td>
+            <td>
+              <span class="icon"><i class="fas fa-person-skating"></i></span>
+              <span class="title table-text ml-2">0 Exercises</span>
+            </td>
+            <td>
+              <span class="icon"><i class="fas fa-bowl-rice"></i></span>
+              <span class="title table-text ml-2">0 Meals</span>
+            </td>
+          </tr>   
+        </table>
+      </CustomLevel>
 
       <br>
       
       <!-- First and last names -->
-      <nav class="level mt-6">
-        <div class="level-item">
-          <p class="title name-text">{{ session.user.firstName }} {{ session.user.lastName }}</p>
-        </div>
-      </nav>
+      <CustomLevel class="mt-6">
+        <p class="title name-text">{{ session.user.firstName }} {{ session.user.lastName }}</p>
+      </CustomLevel>
 
       <!-- Birthday -->
-      <nav class="level mt-6">
-        <div class="level-item">
-          <p class="title date-text">Born {{ session.user.birthday }}</p>
-        </div>
-      </nav>
+      <CustomLevel class="mt-6">
+        <p class="title date-text">Born {{ session.user.birthday }}</p>
+      </CustomLevel>
 
       <!-- E-mail address -->
-      <nav class="level">
-        <div class="level-item">
-          <p class="title email-text">{{ session.user.email }}</p>
-        </div>
-      </nav>
+      <CustomLevel class="mt-4">
+        <p class="title email-text">{{ session.user.email }}</p>
+      </CustomLevel>
       
       <br><br><br><br>
 
-      <!-- Edit profile button -->
-      <nav class="level mb-6">
-        <div class="level-item">
-          <button class="button is-danger is-rounded">Edit Profile</button>
+      <!-- Edit profile button and modal -->
+      <CustomLevel class="mb-6">
+        <button class="button is-danger is-rounded" @click="toggleModal()">Edit Profile</button>
+      </CustomLevel>
+
+      <div class="modal" :class="{ 'is-active': isModalActive }">
+        <div class="modal-background"></div>
+
+        <div class="modal-card">
+          <header class="modal-card-head has-background-danger">
+            <p class="modal-card-title">Edit Profile Information</p>
+            <button class="modal-close is-large" @click="toggleModal(); resetValues();"></button>
+          </header>
+
+          <section class="modal-card-body">
+            <div class="form">
+              <FormField>
+                <template #label>
+                  Profile Picture
+                </template>
+
+                <template #input>
+                  <FileFormField>
+                    <template #input>
+                      <input class="file-input" type="file">
+                    </template>
+                    <template #icon>
+                      <i class="fas fa-image"></i>
+                    </template>
+                    <template #label>
+                      Upload Picture
+                    </template>
+                  </FileFormField>
+                </template>
+                
+                <template #success>
+                  File uploaded
+                </template>
+
+              </FormField>
+
+              <br>
+
+              <FormField>
+                <template #label>
+                  Username
+                </template>
+
+                <template #input>
+                  <input class="input" type="text" placeholder="Input username" :value="usernameDefault">
+                </template>
+
+                <template #leftIcon>
+                  <i class="fas fa-user"></i>
+                </template>
+                <template #rightIcon>
+                  <i class="fas fa-check"></i>
+                </template>
+
+                <template #help>
+                  Must be between 8 and 16 characters long (letters or numbers only)
+                </template>
+                <template #success>
+                  Valid username
+                </template>
+                <template #error>
+                  Invalid username
+                </template>
+
+              </FormField>
+
+              <br>
+
+              <FormField>
+                <template #label>
+                  E-mail
+                </template>
+
+                <template #input>
+                  <input class="input" type="email" placeholder="youremail@site.com" :value="emailDefault">
+                </template>
+
+                <template #leftIcon>
+                  <i class="fas fa-envelope"></i>
+                </template>
+                <template #rightIcon>
+                  <i class="fas fa-check"></i>
+                </template>
+
+                <template #success>
+                  Valid e-mail
+                </template>
+                <template #error>
+                  Invalid e-mail
+                </template>
+
+              </FormField>
+
+              <br>
+
+              <FormField>
+                <template #label>
+                  First Name
+                </template>
+
+                <template #input>
+                  <input class="input" type="text" placeholder="Your first name" :value="firstNameDefault">
+                </template>
+
+                <template #leftIcon>
+                  <i class="fas fa-1"></i>
+                </template>
+                <template #rightIcon>
+                  <i class="fas fa-check"></i>
+                </template>
+
+              </FormField>
+
+              <FormField>
+                <template #label>
+                  Last Name
+                </template>
+
+                <template #input>
+                  <input class="input" type="text" placeholder="Your last name" :value="lastNameDefault">
+                </template>
+
+                <template #leftIcon>
+                  <i class="fas fa-2"></i>
+                </template>
+                <template #rightIcon>
+                  <i class="fas fa-check"></i>
+                </template>
+
+              </FormField>
+
+              <FormField>
+                <template #label>
+                  Birthday
+                </template>
+
+                <template #input>
+                  <input class="input date" type="date" :value="birthdayDefault">
+                </template>
+
+                <template #leftIcon>
+                  <i class="fas fa-calendar"></i>
+                </template>
+                <template #rightIcon>
+                  <i class="fas fa-check"></i>
+                </template>
+
+              </FormField>
+
+              <br>
+
+              <FormField>
+                <template #label>
+                  Confirm Changes
+                </template>
+
+                <template #input>
+                  <button class="button" @click="updateData(); toggleModal();"><strong>Save</strong></button>
+                </template>
+
+              </FormField>
+            </div>
+          </section>
+
+          <footer class="modal-card-foot has-background-danger"></footer>
+
         </div>
-      </nav>
+          
+      </div>
 
     </div>
   </template>
