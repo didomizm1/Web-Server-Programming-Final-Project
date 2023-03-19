@@ -2,6 +2,7 @@
 import Banner from '../components/Banner.vue';
 import PageBox from '../components/PageBox.vue';
 import QuestionAnswer from '../components/QuestionAnswer.vue';
+import SiteLogo from '../components/SiteLogo.vue';
 </script>
 
 <template>
@@ -17,60 +18,67 @@ import QuestionAnswer from '../components/QuestionAnswer.vue';
     <div class="content">
       <QuestionAnswer>
         <template #q>
-          Question 1?
+          What is SushiFit?
         </template>
         <template #a>
-          Answer 1.
+          SushiFit is a fitness app that allows you to keep track of daily activities, including your exercises and meals.
+          You will be able to see statistics about the information you enter, and you can look back at your history as well.
         </template>
       </QuestionAnswer>
 
       <QuestionAnswer>
         <template #q>
-          Question 2?
+          Do I need to make an account to use the app?
         </template>
         <template #a>
-          Answer 2.
+          Yes, an account is required to use SushiFit. You can regster by clicking the "Sign Up" button at the top right corner
+          of the screen on desktop, or in the menu on mobile. 
         </template>
       </QuestionAnswer>
 
       <QuestionAnswer>
         <template #q>
-          Question 3?
+          Can other people see my exercises?
         </template>
         <template #a>
-          Answer 3.
+          You are able to become friends with other users on SushiFit if you desire, so you will be able to view activity that
+          they post about and vice versa!
         </template>
       </QuestionAnswer>
 
       <QuestionAnswer>
         <template #q>
-          Question 4?
+          How can I find other users?
         </template>
         <template #a>
-          Answer 4.
+          To search for other users and friend them, navigate to the "User Search" page and type in the name of the person you wish to find.
         </template>
       </QuestionAnswer>
 
       <QuestionAnswer>
         <template #q>
-          Question 5?
+          Can I change my profile information?
         </template>
         <template #a>
-          Answer 5.
+          Yes! Any information that you wish to change can be viewed and edited on the "Profile" page. Scroll to the bottom and click "Edit Profile",
+          then save any changes.
         </template>
       </QuestionAnswer>
 
       <QuestionAnswer>
         <template #q>
-          Question 6?
+          What new features are planned?
         </template>
         <template #a>
-          Answer 6.
+          In the future, the ability to track hydration and sleep will be added to SushiFit!
         </template>
       </QuestionAnswer>
 
     </div>
   </PageBox>
+
+  <!-- Site logo -->
+  <SiteLogo />
 
 </template>
 
