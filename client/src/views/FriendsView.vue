@@ -1,11 +1,18 @@
 <script setup lang="ts">
-
+import Banner from '../components/Banner.vue';
 </script>
 
 <template>
-  <div>
+  <!-- Banner on the top of the page -->
+  <Banner>
+    <template #title>
+      Friends
+    </template>
+    <template #subtitle>
+      View your friends and their activities!
+    </template>
+  </Banner>
 
-  </div>
 </template>
 
 <style scoped>

@@ -1,11 +1,18 @@
 <script setup lang="ts">
-
+import Banner from '../components/Banner.vue';
 </script>
 
 <template>
-    <div>
+    <!-- Banner on the top of the page -->
+    <Banner>
+        <template #title>
+            Statistics
+        </template>
+        <template #subtitle>
+            View detailed stats about your routine!
+        </template>
+    </Banner>
 
-    </div>
 </template>
 
 <style scoped>
