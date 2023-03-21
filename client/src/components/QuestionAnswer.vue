@@ -15,11 +15,8 @@
 </template>
 
 <style scoped>
-h1 {
-    font-size: 3vw;
-}
 p {
-    font-size: 1.2vw;
+    font-size: 1.15rem;
     line-height: 3;
 }
 </style>
