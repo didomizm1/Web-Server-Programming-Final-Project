@@ -4,11 +4,11 @@ import PageBox from './PageBox.vue';
 
 <template>
     <!-- Custom form component -->
-    <div class="form block">
+    <form class="block">
         <PageBox>
             <slot></slot>
         </PageBox>
-    </div>
+    </form>
 </template>
 
 <style scoped>
