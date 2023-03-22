@@ -20,3 +20,8 @@ export function getExercises(): Exercise[] {
 export function getExercisesByUserID(id: number): Exercise[] {
     return data.exercises.filter((e) => e.userID == id);
 }
+
+// Function to get exercises of all users who are friends with a certain user
+export function getExercisesByFriendsUserIDs(ids: number[]): Exercise[] {
+    return data.exercises.filter((e) => ids.includes(e.userID));
+}

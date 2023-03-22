@@ -16,3 +16,8 @@ export interface User {
 export function getUsers(): User[] {
     return data.users;
 }
+
+// Function to get a user by their ID
+export function getUserByID(id: number): User {
+    return data.users.find((u) => u.id == id) as User;
+}
