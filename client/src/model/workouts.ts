@@ -10,3 +10,8 @@ export interface Workout {
 export function getWorkouts(): Workout[] {
     return data.workouts;
 }
+
+// Function to get a workout by its ID
+export function getWorkoutByID(id: number): Workout {
+    return data.workouts.find((w) => w.id == id) as Workout;
+}

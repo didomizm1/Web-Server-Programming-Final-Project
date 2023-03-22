@@ -14,20 +14,20 @@
             <div class="media-content">
                 <div class="content">
                     <p>
-                        <strong><slot name="name"></slot></strong> <small>(<slot name="username"></slot>)</small> <small>at<slot name="timestamp"></slot></small>
+                        <strong><slot name="name"></slot></strong> <small>(<slot name="username"></slot>) at <slot name="timestamp"></slot></small>
                         <br>
-                        <slot name="workout"></slot>in<slot name="location"></slot>
+                        <slot name="workout"></slot> in <slot name="location"></slot>
                         <div class="columns top-columns">
                             <div class="column has-text-centered">
                                 <div>
                                     <div class="heading">Distance:</div>
-                                    <div class="title"><slot name="distance"></slot>miles</div>
+                                    <div class="title"><slot name="distance"></slot> miles</div>
                                 </div>
                             </div>
                             <div class="column has-text-centered">
                                 <div>
                                     <div class="heading">Duration:</div>
-                                    <div class="title"><slot name="duration"></slot>minutes</div>
+                                    <div class="title"><slot name="duration"></slot> minutes</div>
                                 </div>
                             </div>
                             <div class="column is-4"></div>
@@ -49,7 +49,11 @@
 <style scoped>
 .box {
     outline: solid 5px;
-    box-shadow: 10px 10px 10px
+    box-shadow: 10px 10px 10px;
+    margin-bottom: 5rem;
+}
+.media-content {
+    overflow: hidden;
 }
 .top-columns {
     margin-top: 1rem;

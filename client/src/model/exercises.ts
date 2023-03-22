@@ -11,7 +11,12 @@ export interface Exercise {
     image?: string;
 }
 
-// Function to get exercises
+// Function to get all exercises
 export function getExercises(): Exercise[] {
     return data.exercises;
+}
+
+// Function to get exercises with a certain user ID
+export function getExercisesByUserID(id: number): Exercise[] {
+    return data.exercises.filter((e) => e.userID == id);
 }

@@ -2,15 +2,15 @@
     "workouts": [
         {
             "id": 0,
-            "name": "running"
+            "name": "Running"
         },
         {
             "id": 1,
-            "name": "swimming"
+            "name": "Swimming"
         },
         {
             "id": 2,
-            "name": "skating"
+            "name": "Skating"
         }
     ]
 }

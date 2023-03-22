@@ -1,8 +1,18 @@
 <script setup lang="ts">
+import { useSession } from '../model/session';
+import { getExercisesByUserID } from '../model/exercises';
+import { getWorkoutByID } from '../model/workouts';
 import Banner from '../components/Banner.vue';
 import ActivityBox from '../components/ActivityBox.vue';
 import ProfilePicture from '../components/ProfilePicture.vue';
 import Image from '../components/Image.vue';
+
+// Reactive session object
+const session = useSession();
+
+// Get all exercises associated with the logged in user
+const exercises = getExercisesByUserID(session.user?.id as number);
+
 </script>
 
 <template>
@@ -16,7 +26,7 @@ import Image from '../components/Image.vue';
     </template>
   </Banner>
 
-  <div class="container">
+  <div class="container" v-for="exercise, i in exercises">
     <!-- List of a user's exercises -->
     <ActivityBox>
       <template #profilePicture>
@@ -24,26 +34,26 @@ import Image from '../components/Image.vue';
       </template>
 
       <template #name>
-        Test User
+        {{ session.user?.firstName }} {{ session.user?.lastName }}
       </template>
       <template #username>
-        testuser
+        {{ session.user?.username }}
       </template>
       <template #timestamp>
-        12:00 3/18/23
+        {{ exercise.timestamp }}
       </template>
       <template #workout>
-        Ice Skating
+        {{ getWorkoutByID(exercise.workoutID).name }}
       </template>
       <template #location>
-        New Paltz
+        {{ exercise.location }}
       </template>
 
       <template #distance>
-        5.28
+        {{ exercise.distance }}
       </template>
       <template #duration>
-        28
+        {{ exercise.duration }}
       </template>
       <template #image>
         <Image class="exercise-image" />
