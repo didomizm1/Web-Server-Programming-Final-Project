@@ -1,8 +1,10 @@
 <script setup lang="ts">
+import { ref } from 'vue';
 import { useSession } from '../model/session';
 import { getExercisesByUserID } from '../model/exercises';
 import { getWorkoutByID } from '../model/workouts';
 import Banner from '../components/Banner.vue';
+import CustomLevel from '../components/CustomLevel.vue';
 import ActivityBox from '../components/ActivityBox.vue';
 import ProfilePicture from '../components/ProfilePicture.vue';
 import Image from '../components/Image.vue';
@@ -12,6 +14,14 @@ const session = useSession();
 
 // Get all exercises associated with the logged in user
 const exercises = getExercisesByUserID(session.user?.id as number);
+
+// Add exercise form modal functionality
+const isModalActive = ref(false);
+
+function toggleModal() {
+  isModalActive.value = !isModalActive.value;
+  console.log({ isModalActive });
+}
 
 </script>
 
@@ -25,6 +35,10 @@ const exercises = getExercisesByUserID(session.user?.id as number);
       Track your workouts below!
     </template>
   </Banner>
+
+  <CustomLevel class="mb-6">
+    <button class="button is-danger is-rounded" @click="toggleModal()">Add New Exercise</button>
+  </CustomLevel>
 
   <div class="container" v-for="exercise, i in exercises">
     <!-- List of a user's exercises -->
