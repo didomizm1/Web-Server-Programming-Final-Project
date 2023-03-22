@@ -1,0 +1,44 @@
+{
+    "exercises": [
+        {
+            "userID": 0,
+            "workoutID": 0,
+            "location": "New Paltz",
+            "distance": 5,
+            "duration": 5,
+            "timestamp": "12:00 3/18/2023"
+        },
+        {
+            "userID": 0,
+            "workoutID": 1,
+            "location": "New Paltz",
+            "distance": 5,
+            "duration": 5,
+            "timestamp": "9:00 3/18/2023"
+        },
+        {
+            "userID": 0,
+            "workoutID": 2,
+            "location": "New Paltz",
+            "distance": 2,
+            "duration": 3,
+            "timestamp": "7:00 3/18/2023"
+        },
+        {
+            "userID": 1,
+            "workoutID": 1,
+            "location": "New York City",
+            "distance": 4,
+            "duration": 7,
+            "timestamp": "2:00 3/18/2023"
+        },
+        {
+            "userID": 2,
+            "workoutID": 2,
+            "location": "Tokyo",
+            "distance": 3,
+            "duration": 8,
+            "timestamp": "1:00 3/18/2023"
+        }
+    ]
+}

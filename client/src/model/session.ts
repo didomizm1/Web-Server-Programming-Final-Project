@@ -1,21 +1,12 @@
+import data from "../data/users.json"
 import { reactive } from "vue";
 import { useRouter } from "vue-router";
+import type { User } from "./users";
 
 // Reactive session object
 const session = reactive({
     user: null as User | null,
 });
-
-// Basic blueprint for a user
-interface User {
-    userID: number;
-    username: string;
-    email: string;
-    firstName: string;
-    lastName: string;
-    birthday: string;
-    token?: string;
-}
 
 // Function to use the session
 export function useSession() {
@@ -29,14 +20,7 @@ export function useLogin() {
     // Assigns values to a user's properties and redirects to the home page
     return function() {
         console.log({ router });
-        session.user = {
-            userID: 0,
-            username: "testuser",
-            email: "testemail@email.com",
-            firstName: "Test",
-            lastName: "User",
-            birthday: "0/0/0000",
-        }
+        session.user = data.users[0];
         router.push("/");
     }
 }

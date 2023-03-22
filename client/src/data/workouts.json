@@ -1,0 +1,16 @@
+{
+    "workouts": [
+        {
+            "id": 0,
+            "name": "running"
+        },
+        {
+            "id": 1,
+            "name": "swimming"
+        },
+        {
+            "id": 2,
+            "name": "skating"
+        }
+    ]
+}
