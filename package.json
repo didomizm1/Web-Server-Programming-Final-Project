@@ -8,8 +8,12 @@
     "url": "git+https://github.com/didomizm1/Web-Server-Programming-Final-Project.git"
   },
   "private": true,
+  "workspaces": [
+    "client"
+  ],
 
   "scripts": {
+    "build": "npm i -ws && npm run build -ws",
     "start": "node server/index.js",
     "dev": "nodemon server/index.js --watch server"
   },
