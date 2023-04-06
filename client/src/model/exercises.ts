@@ -1,4 +1,5 @@
-import data from "../data/exercises.json"
+import type { DataEnvelope, DataListEnvelope } from "./myFetch";
+import { api } from "./session";
 
 // Blueprint for an exercise
 export interface Exercise {
@@ -12,16 +13,16 @@ export interface Exercise {
 }
 
 // Function to get all exercises
-export function getExercises(): Exercise[] {
-    return data.exercises;
+export function getExercises(): Promise<DataListEnvelope<Exercise>> {
+    return api('exercises')
 }
 
 // Function to get exercises with a certain user ID
-export function getExercisesByUserID(id: number): Exercise[] {
-    return data.exercises.filter((e) => e.userID == id);
+export function getExercisesByUserID(userID: number): Promise<DataListEnvelope<Exercise>> {
+    return api(`exercises/${userID}`)
 }
 
-// Function to get exercises of all users who are friends with a certain user
-export function getExercisesByFriendsUserIDs(ids: number[]): Exercise[] {
-    return data.exercises.filter((e) => ids.includes(e.userID));
+// Function to create a new exercise for a user
+export function createExercise(exercise: Exercise): Promise<DataEnvelope<Exercise>> {
+    return api('exercises', exercise)
 }

@@ -1,4 +1,5 @@
-import data from "../data/workouts.json"
+import type { DataEnvelope, DataListEnvelope } from "./myFetch";
+import { api } from "./session";
 
 // Blueprint for a workout
 export interface Workout {
@@ -7,11 +8,11 @@ export interface Workout {
 }
 
 // Function to get workouts
-export function getWorkouts(): Workout[] {
-    return data.workouts;
+export function getWorkouts(): Promise<DataListEnvelope<Workout>> {
+    return api('workouts')
 }
 
 // Function to get a workout by its ID
-export function getWorkoutByID(id: number): Workout {
-    return data.workouts.find((w) => w.id == id) as Workout;
+export function getWorkoutByID(id: number): Promise<DataEnvelope<Workout>> {
+    return api(`workouts/${id}`)
 }
