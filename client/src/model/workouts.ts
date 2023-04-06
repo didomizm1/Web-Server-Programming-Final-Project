@@ -16,3 +16,8 @@ export function getWorkouts(): Promise<DataListEnvelope<Workout>> {
 export function getWorkoutByID(id: number): Promise<DataEnvelope<Workout>> {
     return api(`workouts/${id}`)
 }
+
+// Function to create a new workout
+export function createWorkout(workout: Workout): Promise<DataEnvelope<Workout>> {
+    return api('workouts', workout)
+}

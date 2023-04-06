@@ -18,6 +18,11 @@ export function getExercises(): Promise<DataListEnvelope<Exercise>> {
     return api('exercises')
 }
 
+// Function to get an exercise by its ID
+export function getExerciseByID(id: number): Promise<DataEnvelope<Exercise>> {
+    return api(`exercises/${id}`)
+}
+
 // Function to create a new exercise for a user
 export function createExercise(exercise: Exercise): Promise<DataEnvelope<Exercise>> {
     return api('exercises', exercise)
