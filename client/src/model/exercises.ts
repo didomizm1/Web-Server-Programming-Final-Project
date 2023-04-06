@@ -3,6 +3,7 @@ import { api } from "./session";
 
 // Blueprint for an exercise
 export interface Exercise {
+    id: number;
     userID: number;
     workoutID: number;
     location: string;
@@ -15,11 +16,6 @@ export interface Exercise {
 // Function to get all exercises
 export function getExercises(): Promise<DataListEnvelope<Exercise>> {
     return api('exercises')
-}
-
-// Function to get exercises with a certain user ID
-export function getExercisesByUserID(userID: number): Promise<DataListEnvelope<Exercise>> {
-    return api(`exercises/${userID}`)
 }
 
 // Function to create a new exercise for a user
