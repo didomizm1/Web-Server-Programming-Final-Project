@@ -1,8 +1,7 @@
 import { reactive } from "vue";
 import { useRouter } from "vue-router";
 import * as myFetch from "./myFetch";
-import type { User } from "./users";
-import data from "../data/users.json"
+import { getUserByID, type User } from "./users";
 
 // Reactive session object
 const session = reactive({
@@ -39,10 +38,12 @@ export function api(url: string, data?: any, method?: string, headers?: any) {
 export function useLogin() {
     const router = useRouter();
 
-    // Assigns values to a user's properties and redirects to the home page
+    // Assigns user data to the session and redirects to the home page
     return function() {
         console.log({ router });
-        session.user = data.users[0];
+        getUserByID(0).then((data) => {
+            session.user = data.data;
+        });
         router.push("/");
     }
 }

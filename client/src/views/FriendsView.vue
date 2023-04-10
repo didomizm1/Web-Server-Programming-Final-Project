@@ -30,9 +30,6 @@ getWorkouts().then((data) => {
   workouts.value = data.data;
 });
 
-// Get all exercises associated with the logged in user
-//const exercises = getExercisesByFriendsUserIDs(session.user?.friendsUserIDs as number[]);
-
 </script>
 
 <template>
