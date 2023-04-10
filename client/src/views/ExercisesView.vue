@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 import { useSession } from '../model/session';
-import { getExercisesByUserID } from '../model/exercises';
-import { getWorkoutByID } from '../model/workouts';
+import { getExercises, type Exercise } from '../model/exercises';
+import { getWorkouts, type Workout } from '../model/workouts';
 import Banner from '../components/Banner.vue';
 import CustomLevel from '../components/CustomLevel.vue';
 import ActivityBox from '../components/ActivityBox.vue';
@@ -12,8 +12,17 @@ import Image from '../components/Image.vue';
 // Reactive session object
 const session = useSession();
 
-// Get all exercises associated with the logged in user
-const exercises = getExercisesByUserID(session.user?.id as number);
+// Get all exercises associated with logged in user
+const exercises = ref<Exercise[]>([]);
+getExercises().then((data) => {
+  exercises.value = data.data.filter(e => e.userID === session.user?.id);
+});
+
+// Get all workouts
+const workouts = ref<Workout[]>([]);
+getWorkouts().then((data) => {
+  workouts.value = data.data;
+});
 
 // Add exercise form modal functionality
 const isModalActive = ref(false);
@@ -57,7 +66,7 @@ function toggleModal() {
         {{ exercise.timestamp }}
       </template>
       <template #workout>
-        {{ getWorkoutByID(exercise.workoutID).name }}
+        {{ workouts.find(w => w.id === exercise.workoutID)?.name }}
       </template>
       <template #location>
         {{ exercise.location }}

@@ -3,12 +3,14 @@ const model = require('../models/users');
 const router = express.Router();
 
 router
+    // Get all
     .get('/', (req, res) => {
         const list = model.getUsers();
         const data = { data: list, total: list.length, isSuccess: true };
         res.send(data)
     })
 
+    // Search
     .get('/search/:q', (req, res) => {
         const term = req.params.q;
         console.log({ term });
@@ -17,6 +19,7 @@ router
         res.send(data)
     })
 
+    // Get by ID
     .get('/:id', (req, res) => {
         const id = +req.params.id;
         const user = model.getUserByID(id);
@@ -24,6 +27,7 @@ router
         res.send(data)
     })
 
+    // Add new
     .post('/', (req, res) => {
         const user = req.body;
 
@@ -37,6 +41,7 @@ router
         res.send(data)
     })
 
+    // Update
     .patch('/:id', (req, res) => {
         const user = req.body;
         model.updateUser(user);
@@ -44,6 +49,7 @@ router
         res.send(data)
     })
 
+    // Delete
     .delete('/:id', (req, res) => {
         const id = +req.params.id;
         model.deleteUser(id);

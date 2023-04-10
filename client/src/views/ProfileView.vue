@@ -3,7 +3,6 @@ import { ref } from 'vue';
 import { useSession } from '../model/session';
 import ProfilePicture from '../components/ProfilePicture.vue';
 import CustomLevel from '../components/CustomLevel.vue';
-import CustomForm from '../components/CustomForm.vue';
 import FormField from '../components/FormField.vue';
 import FileFormField from '../components/FileFormField.vue';
 
@@ -38,9 +37,9 @@ function resetValues() {
   birthdayDefault.value = session.user?.birthday;
 }
 
-// Update profile data when save button is clicked
+// Save updated profile information
 function updateData() {
-  
+
 }
 
 </script>
@@ -123,7 +122,7 @@ function updateData() {
           </header>
 
           <section class="modal-card-body">
-            <div class="form">
+            <form @submit.prevent="updateData()">
               <FormField>
                 <template #label>
                   Profile Picture
@@ -270,11 +269,11 @@ function updateData() {
                 </template>
 
                 <template #input>
-                  <button class="button" @click="updateData(); toggleModal();"><strong>Save</strong></button>
+                  <button class="button" @click="toggleModal();"><strong>Save</strong></button>
                 </template>
 
               </FormField>
-            </div>
+            </form>
           </section>
 
           <footer class="modal-card-foot has-background-danger"></footer>

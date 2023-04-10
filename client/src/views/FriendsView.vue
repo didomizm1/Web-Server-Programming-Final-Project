@@ -1,8 +1,9 @@
 <script setup lang="ts">
+import { ref } from 'vue';
 import { useSession } from '../model/session';
-import { getUserByID } from '../model/users';
-import { getExercisesByFriendsUserIDs } from '../model/exercises';
-import { getWorkoutByID } from '../model/workouts';
+import { getUsers, type User } from '../model/users';
+import { getExercises, type Exercise } from '../model/exercises';
+import { getWorkouts, type Workout } from '../model/workouts';
 import Banner from '../components/Banner.vue';
 import ActivityBox from '../components/ActivityBox.vue';
 import ProfilePicture from '../components/ProfilePicture.vue';
@@ -11,8 +12,26 @@ import Image from '../components/Image.vue';
 // Reactive session object
 const session = useSession();
 
+// Get all users that are friends of the logged in user
+const users = ref<User[]>([]);
+getUsers().then((data) => {
+  users.value = data.data.filter(u => session.user?.friendsUserIDs.includes(u.id));
+});
+
+// Get all exercises of logged in user's friends
+const exercises = ref<Exercise[]>([]);
+getExercises().then((data) => {
+  exercises.value = data.data.filter(e => session.user?.friendsUserIDs.includes(e.userID));
+});
+
+// Get all workouts
+const workouts = ref<Workout[]>([]);
+getWorkouts().then((data) => {
+  workouts.value = data.data;
+});
+
 // Get all exercises associated with the logged in user
-const exercises = getExercisesByFriendsUserIDs(session.user?.friendsUserIDs as number[]);
+//const exercises = getExercisesByFriendsUserIDs(session.user?.friendsUserIDs as number[]);
 
 </script>
 
@@ -35,16 +54,16 @@ const exercises = getExercisesByFriendsUserIDs(session.user?.friendsUserIDs as n
       </template>
 
       <template #name>
-        {{ getUserByID(exercise.userID).firstName }} {{ getUserByID(exercise.userID).lastName }}
+        {{ users.find(u => u.id === exercise.userID)?.firstName }} {{ users.find(u => u.id === exercise.userID)?.lastName }}
       </template>
       <template #username>
-        {{ getUserByID(exercise.userID).username }}
+        {{ users.find(u => u.id === exercise.userID)?.username }}
       </template>
       <template #timestamp>
         {{ exercise.timestamp }}
       </template>
       <template #workout>
-        {{ getWorkoutByID(exercise.workoutID).name }}
+        {{ workouts.find(w => w.id === exercise.workoutID)?.name }}
       </template>
       <template #location>
         {{ exercise.location }}
