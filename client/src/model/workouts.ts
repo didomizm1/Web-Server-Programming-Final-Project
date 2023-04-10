@@ -5,6 +5,7 @@ import { api } from "./session";
 export interface Workout {
     id: number;
     name: string;
+    caloriesPerMinute: number;
 }
 
 // Function to get workouts
