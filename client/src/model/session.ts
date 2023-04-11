@@ -11,6 +11,7 @@ const session = reactive({
         msg: string,
         type: "success" | "danger" | "warning" | "info",
     }[],
+    redirectUrl: null as string | null,
 });
 
 // Function to use the session
@@ -44,7 +45,8 @@ export function useLogin() {
         getUserByID(0).then((data) => {
             session.user = data.data;
         });
-        router.push("/");
+        router.push(session.redirectUrl ?? "/");
+        session.redirectUrl = null;
     }
 }
 
