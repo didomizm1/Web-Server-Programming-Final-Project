@@ -57,7 +57,7 @@ getWorkouts().then((data) => {
         {{ users.find(u => u.id === exercise.userID)?.username }}
       </template>
       <template #timestamp>
-        {{ exercise.timestamp }}
+        {{ exercise.date }}
       </template>
       <template #workout>
         {{ workouts.find(w => w.id === exercise.workoutID)?.name }}

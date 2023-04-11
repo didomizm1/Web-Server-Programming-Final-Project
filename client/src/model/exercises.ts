@@ -9,7 +9,7 @@ export interface Exercise {
     location: string;
     distance: number;
     duration: number;
-    timestamp: string;
+    date: string;
     image?: string;
 }
 

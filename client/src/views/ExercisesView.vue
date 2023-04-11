@@ -63,7 +63,7 @@ function toggleModal() {
         {{ session.user?.username }}
       </template>
       <template #timestamp>
-        {{ exercise.timestamp }}
+        {{ exercise.date }}
       </template>
       <template #workout>
         {{ workouts.find(w => w.id === exercise.workoutID)?.name }}
