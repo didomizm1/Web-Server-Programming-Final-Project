@@ -51,16 +51,21 @@ function categorizeExercises() {
     </Banner>
 
     <!-- Statistics for each date where a user posted an exercise -->
-    <template v-for="date, i in keys">
+    <div class="container" v-for="date, i in keys">
         <StatsBox>
-            <div class="content">
-                {{ date }}
-            </div>
+            <template #date>{{ date }}</template>
+            <template #distance>Hello</template>
+            <template #duration>Hello</template>
+            <template #pace>Hello</template>
+            <template #calories>Hello</template>
         </StatsBox>
-    </template>
+    </div>
 
 </template>
 
 <style scoped>
-
+.container {
+  margin-left: 15vw;
+  margin-right: 15vw;
+}
 </style>

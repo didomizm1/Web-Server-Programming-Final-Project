@@ -1,22 +1,31 @@
 <script setup lang="ts">
-
+import CustomLevel from './CustomLevel.vue';
 </script>
 
 <template>
-    <div class="container">
+    <!-- Container for statistics about a single day of exercises -->
         <div class="box has-background-warning-light">
-            <slot></slot>
+            <CustomLevel>
+                <slot name="date"></slot>
+            </CustomLevel>
+            <CustomLevel>
+                <slot name="distance"></slot>
+            </CustomLevel>
+            <CustomLevel>
+                <slot name="duration"></slot>
+            </CustomLevel>
+            <CustomLevel>
+                <slot name="pace"></slot>
+            </CustomLevel>
+            <CustomLevel>
+                <slot name="calories"></slot>
+            </CustomLevel>
         </div>
-    </div>
 </template>
 
 <style scoped>
-.container {
-    margin-left: 15rem;
-    margin-right: 15rem;
-    min-width: fit-content;
-}
 .box {
     outline: solid 5px;
+    margin-bottom: 5rem;
 }
 </style>
