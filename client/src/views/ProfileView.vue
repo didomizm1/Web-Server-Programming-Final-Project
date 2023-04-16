@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 import { useSession } from '../model/session';
+import { getExercises, type Exercise } from '../model/exercises';
 import ProfilePicture from '../components/ProfilePicture.vue';
 import CustomLevel from '../components/CustomLevel.vue';
 import FormField from '../components/FormField.vue';
@@ -8,6 +9,12 @@ import FileFormField from '../components/FileFormField.vue';
 
 // Reactive session object
 const session = useSession();
+
+// Get all exercises associated with logged in user
+const exercises = ref<Exercise[]>([]);
+getExercises().then((data) => {
+  exercises.value = data.data.filter(e => e.userID === session.user?.id);
+});
 
 // Edit profile form modal functionality
 const isModalActive = ref(false);
@@ -74,11 +81,11 @@ function updateData() {
           <tr>
             <td>
               <span class="icon"><i class="fas fa-users"></i></span>
-              <span class="title table-text ml-2">0 Friends</span>
+              <span class="title table-text ml-2">{{ session.user.friendsUserIDs.length }} Friends</span>
             </td>
             <td>
               <span class="icon"><i class="fas fa-person-skating"></i></span>
-              <span class="title table-text ml-2">0 Exercises</span>
+              <span class="title table-text ml-2">{{ exercises.length }} Exercises</span>
             </td>
             <td>
               <span class="icon"><i class="fas fa-bowl-rice"></i></span>
@@ -317,6 +324,4 @@ td {
 .email-text {
   font-size: max(0.7rem, 1.25vw);
 }
-
-
 </style>
