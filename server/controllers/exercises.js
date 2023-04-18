@@ -4,10 +4,12 @@ const router = express.Router();
 
 router
     // Get all
-    .get('/', (req, res) => {
-        const list = model.getExercises();
-        const data = { data: list, total: list.length, isSuccess: true };
-        res.send(data)
+    .get('/', (req, res, next) => {
+        model.getExercises()
+            .then(list => {
+                const data = { data: list, total: list.length, isSuccess: true };
+                res.send(data)
+            }).catch(next);
     })
 
     // Search
