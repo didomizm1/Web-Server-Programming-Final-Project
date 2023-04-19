@@ -15,8 +15,19 @@ getExercises().then((data) => {
   categorizeExercises();
 });
 
-const keys = ref<string[]>([]); // Contains the keys which are the indices of each list in values
+// Blueprint for an object containing data about a single day's exercises
+interface ExerciseData {
+    distance: number;
+    duration: number;
+    pace: number;
+    calories: number;
+}
+
+const keys = ref<string[]>([]); // Contains the keys which are the indices of each array in values
 const values = ref<Exercise[][]>([]); // Contains arrays; in each array, there are the exercises for a certain day
+const computedData = ref<ExerciseData[]>([]); // Contains computed values from the exercises for each date 
+
+// Separates exercises into arrays based upon their date
 function categorizeExercises() {
     exercises.value.forEach(e => {
         // Date of current exercise
@@ -34,6 +45,33 @@ function categorizeExercises() {
         // Add new exercise to array in values associated with current date
         const arrayIndex = keys.value.indexOf(currentDate);
         values.value[arrayIndex].push(e);
+    })
+
+    // Use separated exercises to calculate statistics values
+    computations();
+}
+
+// Calculates statistics per day based upon exercises 
+function computations() {
+    // Iterate through arrays of exercises
+    values.value.forEach(currentDayExercises => {
+        // Initial data values in object
+        const newExerciseData: ExerciseData = {
+            distance: 0,
+            duration: 0,
+            pace: 0,
+            calories: 0
+        }
+
+        // Iterate through exercises within an array
+        currentDayExercises.forEach(currentExercise => {
+            // Increment data values
+            newExerciseData.distance += currentExercise.distance;
+            newExerciseData.duration += currentExercise.duration;
+        })
+
+        // Add computed data to object and add object to array
+        computedData.value.push(newExerciseData);
     })
 }
 
@@ -54,10 +92,10 @@ function categorizeExercises() {
     <div class="container" v-for="date, i in keys">
         <StatsBox>
             <template #date>{{ date }}</template>
-            <template #distance>Hello</template>
-            <template #duration>Hello</template>
-            <template #pace>Hello</template>
-            <template #calories>Hello</template>
+            <template #distance>{{ computedData[i].distance }} Miles</template>
+            <template #duration>{{ computedData[i].duration }} Minutes</template>
+            <template #pace>{{ computedData[i].pace }} MPH</template>
+            <template #calories>{{ computedData[i].calories }} Calories Burned</template>
         </StatsBox>
     </div>
 
