@@ -2,11 +2,18 @@
 import { ref } from 'vue';
 import { useSession } from '../model/session';
 import { getExercises, type Exercise } from '../model/exercises';
+import { getWorkouts, type Workout } from '../model/workouts';
 import Banner from '../components/Banner.vue';
 import StatsBox from '../components/StatsBox.vue';
 
 // Reactive session object
 const session = useSession();
+
+// Get all workouts
+const workouts = ref<Workout[]>([]);
+getWorkouts().then((data) => {
+  workouts.value = data.data;
+});
 
 // Get all exercises associated with logged in user
 const exercises = ref<Exercise[]>([]);
@@ -16,7 +23,7 @@ getExercises().then((data) => {
 });
 
 // Blueprint for an object containing data about a single day's exercises
-interface ExerciseData {
+interface ExerciseDayData {
     distance: number;
     duration: number;
     pace: number;
@@ -25,7 +32,7 @@ interface ExerciseData {
 
 const keys = ref<string[]>([]); // Contains the keys which are the indices of each array in values
 const values = ref<Exercise[][]>([]); // Contains arrays; in each array, there are the exercises for a certain day
-const computedData = ref<ExerciseData[]>([]); // Contains computed values from the exercises for each date 
+const computedData = ref<ExerciseDayData[]>([]); // Contains computed values from the exercises for each date 
 
 // Separates exercises into arrays based upon their date
 function categorizeExercises() {
@@ -56,7 +63,7 @@ function computations() {
     // Iterate through arrays of exercises
     values.value.forEach(currentDayExercises => {
         // Initial data values in object
-        const newExerciseData: ExerciseData = {
+        const newExerciseDayData: ExerciseDayData = {
             distance: 0,
             duration: 0,
             pace: 0,
@@ -65,13 +72,20 @@ function computations() {
 
         // Iterate through exercises within an array
         currentDayExercises.forEach(currentExercise => {
-            // Increment data values
-            newExerciseData.distance += currentExercise.distance;
-            newExerciseData.duration += currentExercise.duration;
+            // Increment data values for distance and duration
+            newExerciseDayData.distance += currentExercise.distance;
+            newExerciseDayData.duration += currentExercise.duration;
+
+            // Increment data value for total calories burned
+            // Multiplies calories burned per minute for the workout used in the exercise by the duration of the exercise to get calories burned for the exercise
+            newExerciseDayData.calories += (workouts.value.find(w => w.id == currentExercise.workoutID)!.caloriesPerMinute * currentExercise.duration);
         })
 
-        // Add computed data to object and add object to array
-        computedData.value.push(newExerciseData);
+        // Convert duration minutes to hours and divide distance by duration for pace
+        newExerciseDayData.pace = (newExerciseDayData.distance/(newExerciseDayData.duration/60));
+
+        // Add object to array
+        computedData.value.push(newExerciseDayData);
     })
 }
 
