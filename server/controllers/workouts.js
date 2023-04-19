@@ -5,9 +5,11 @@ const router = express.Router();
 router
     // Get all
     .get('/', (req, res) => {
-        const list = model.getWorkouts();
-        const data = { data: list, total: list.length, isSuccess: true };
-        res.send(data)
+        model.getWorkouts()
+            .then(list => {
+                const data = { data: list, total: list.length, isSuccess: true };
+                res.send(data)
+            }).catch(next);
     })
 
     // Search
