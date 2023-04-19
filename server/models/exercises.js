@@ -9,7 +9,7 @@ async function collection() {
 }
 
 async function getExercises() {
-    const col = collection();
+    const col = await collection();
     const exercises = await col.find().toArray();
     return exercises;
 }
