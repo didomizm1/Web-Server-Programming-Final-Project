@@ -3,6 +3,7 @@
         {
             "id": 0,
             "username": "testuser1",
+            "password": "",
             "email": "testemail1@email.com",
             "firstName": "Test",
             "lastName": "User1",
@@ -15,6 +16,7 @@
         {
             "id": 1,
             "username": "testuser2",
+            "password": "",
             "email": "testemail2@email.com",
             "firstName": "Test",
             "lastName": "User2",
@@ -27,6 +29,7 @@
         {
             "id": 2,
             "username": "testuser3",
+            "password":"",
             "email": "testemail3@email.com",
             "firstName": "Test",
             "lastName": "User3",
