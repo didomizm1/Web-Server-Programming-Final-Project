@@ -8,44 +8,74 @@ async function collection() {
     return db.collection(COLLECTION_NAME);
 }
 
-async function getUsers() {
+async function getAll(page = 1, pageSize = 30) {
     const col = await collection();
-    const users = await col.find().toArray();
-    return users;
+    const items = await col.find().skip((page-1) * pageSize).limit(pageSize).toArray();
+    const total = await col.countDocuments();
+    return { items, total };
 }
 
-function getUserByID(id) {
-    return data.users.find(user => user.id === id);
+async function getById(id) {
+    const col = await collection();
+    const item = await col.findOne({ _id: new ObjectId(id) });
+    return item;
 }
 
-function addUser(user) {
-    user.id = data.users.length + 1;
-    data.users.push(user);
+async function add(item) {
+    const col = await collection();
+
+    const result = await col.insertOne(item);
+
+    item._id = result.insertedId;
+    return item;
 }
 
-function updateUser(user) {
-    const index = data.users.findIndex(u => u.id === user.id);
-    data.users[index] = user;
+async function update(item) {
+
+    console.log(item);
+    const col = await collection();
+    const result = await col.findOneAndUpdate(
+        { _id: new ObjectId(item.id) },
+        { $set: item },
+        { returnDocument: 'after' }
+    );
+
+    return result.value;
 }
 
-function deleteUser(id) {
-    const index = data.users.findIndex(u => u.id === id);
-    data.users.splice(index, 1);
+async function deleteItem(id) {
+    const col = await collection();
+    const result = await col.deleteOne({ _id: new ObjectId(id) });
+    return result.deletedCount;
 }
 
-function searchUsers(searchTerm) {
-    return data.users.filter(user => {
-        return user.username.toLowerCase().includes(searchTerm.toLowerCase())  ||
-            user.firstName.toLowerCase().includes(searchTerm.toLowerCase())  ||
-            user.lastName.toLowerCase().includes(searchTerm.toLowerCase());
-    });
+async function search(searchTerm, page = 1, pageSize = 30) {
+    const col = await collection();
+    const query = {
+        $or: [
+            { title: { $regex: searchTerm, $options: 'i' } },
+            { description: { $regex: searchTerm, $options: 'i' } },
+            { brand: { $regex: searchTerm, $options: 'i' } }
+        ]
+    };
+
+    const items = await col.find(query).skip((page - 1) * pageSize).limit(pageSize).toArray();
+    const total = await col.countDocuments(query);
+    return { items, total };
+}
+
+async function seed() {
+    const col = await collection();
+    const result = await col.insertMany(data.users);
+    return result.insertedCount;
 }
 
 module.exports = {
-    getUsers,
-    getUserByID,
-    addUser,
-    updateUser,
-    deleteUser,
-    searchUsers
+    getAll,
+    getById,
+    add,
+    update,
+    deleteItem,
+    search,
+    seed,
 };

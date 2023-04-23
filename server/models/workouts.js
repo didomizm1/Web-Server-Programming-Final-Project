@@ -8,42 +8,74 @@ async function collection() {
     return db.collection(COLLECTION_NAME);
 }
 
-async function getWorkouts() {
+async function getAll(page = 1, pageSize = 30) {
     const col = await collection();
-    const workouts = await col.find().toArray();
-    return workouts;
+    const items = await col.find().skip((page-1) * pageSize).limit(pageSize).toArray();
+    const total = await col.countDocuments();
+    return { items, total };
 }
 
-function getWorkoutByID(id) {
-    return data.workouts.find(workout => workout.id === id);
+async function getById(id) {
+    const col = await collection();
+    const item = await col.findOne({ _id: new ObjectId(id) });
+    return item;
 }
 
-function addWorkout(workout) {
-    workout.id = data.workouts.length + 1;
-    data.workouts.push(workout);
+async function add(item) {
+    const col = await collection();
+
+    const result = await col.insertOne(item);
+
+    item._id = result.insertedId;
+    return item;
 }
 
-function updateWorkout(workout) {
-    const index = data.workouts.findIndex(w => w.id === workout.id);
-    data.workouts[index] = workout;
+async function update(item) {
+
+    console.log(item);
+    const col = await collection();
+    const result = await col.findOneAndUpdate(
+        { _id: new ObjectId(item.id) },
+        { $set: item },
+        { returnDocument: 'after' }
+    );
+
+    return result.value;
 }
 
-function deleteWorkout(id) {
-    const index = data.workouts.findIndex(w => w.id === id);
-    data.workouts.splice(index, 1);
+async function deleteItem(id) {
+    const col = await collection();
+    const result = await col.deleteOne({ _id: new ObjectId(id) });
+    return result.deletedCount;
 }
 
-function searchWorkouts(searchTerm) {
-    return data.workouts.filter(workout => {
-        return workout.name.toLowerCase().includes(searchTerm.toLowerCase());
-    });
+async function search(searchTerm, page = 1, pageSize = 30) {
+    const col = await collection();
+    const query = {
+        $or: [
+            { title: { $regex: searchTerm, $options: 'i' } },
+            { description: { $regex: searchTerm, $options: 'i' } },
+            { brand: { $regex: searchTerm, $options: 'i' } }
+        ]
+    };
+
+    const items = await col.find(query).skip((page - 1) * pageSize).limit(pageSize).toArray();
+    const total = await col.countDocuments(query);
+    return { items, total };
+}
+
+async function seed() {
+    const col = await collection();
+    const result = await col.insertMany(data.workouts);
+    return result.insertedCount;
 }
 
 module.exports = {
-    getWorkouts,
-    getWorkoutByID,
-    addWorkout,
-    updateWorkout,
-    deleteWorkout,
-    searchWorkouts
+    getAll,
+    getById,
+    add,
+    update,
+    deleteItem,
+    search,
+    seed,
 };
