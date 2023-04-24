@@ -117,7 +117,7 @@ function computations() {
 
 <style scoped>
 .container {
-  margin-left: 15vw;
-  margin-right: 15vw;
+  margin-left: 10vw;
+  margin-right: 10vw;
 }
 </style>
