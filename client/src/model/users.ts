@@ -3,13 +3,13 @@ import { api } from "./session";
 
 // Blueprint for a user
 export interface User {
-    id: number;
+    id: string;
     username: string;
     email: string;
     firstName: string;
     lastName: string;
     birthday: string;
-    friendsUserIDs: number[];
+    friendsUserIDs: string[];
     profilePicture?: string;
 }
 
@@ -19,7 +19,7 @@ export function getUsers(): Promise<DataListEnvelope<User>> {
 }
 
 // Function to get a user by their ID
-export function getUserByID(id: number): Promise<DataEnvelope<User>> {
+export function getUserByID(id: string): Promise<DataEnvelope<User>> {
     return api(`users/${id}`)
 }
 

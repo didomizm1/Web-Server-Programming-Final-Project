@@ -3,9 +3,9 @@ import { api } from "./session";
 
 // Blueprint for an exercise
 export interface Exercise {
-    id: number;
-    userID: number;
-    workoutID: number;
+    id: string;
+    userID: string;
+    workoutID: string;
     location: string;
     distance: number;
     duration: number;
@@ -19,7 +19,7 @@ export function getExercises(): Promise<DataListEnvelope<Exercise>> {
 }
 
 // Function to get an exercise by its ID
-export function getExerciseByID(id: number): Promise<DataEnvelope<Exercise>> {
+export function getExerciseByID(id: string): Promise<DataEnvelope<Exercise>> {
     return api(`exercises/${id}`)
 }
 

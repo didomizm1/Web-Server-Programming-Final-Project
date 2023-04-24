@@ -42,7 +42,7 @@ export function useLogin() {
     // Assigns user data to the session and redirects to the home page
     return function() {
         console.log({ router });
-        getUserByID(0).then((data) => {
+        getUserByID("643e2c375ed96789d1686ce7").then((data) => {
             session.user = data.data;
         });
         router.push(session.redirectUrl ?? "/");

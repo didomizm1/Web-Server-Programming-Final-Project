@@ -3,7 +3,7 @@ import { api } from "./session";
 
 // Blueprint for a workout
 export interface Workout {
-    id: number;
+    id: string;
     name: string;
     caloriesPerMinute: number;
 }
@@ -14,7 +14,7 @@ export function getWorkouts(): Promise<DataListEnvelope<Workout>> {
 }
 
 // Function to get a workout by its ID
-export function getWorkoutByID(id: number): Promise<DataEnvelope<Workout>> {
+export function getWorkoutByID(id: string): Promise<DataEnvelope<Workout>> {
     return api(`workouts/${id}`)
 }
 
