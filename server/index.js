@@ -4,6 +4,7 @@ const path = require('path')
 const users = require('./controllers/users')
 const exercises = require('./controllers/exercises')
 const workouts = require('./controllers/workouts')
+const { requireLogin } = require('./middleware/authorization')
 const app = express()
 
 const hostname = '127.0.0.1';
@@ -27,9 +28,9 @@ app
     .get('/api/v1/', (req, res) => {
         res.send('Hello New York Rangers! From Express')
     })
-    .use('/api/v1/users', users)
-    .use('/api/v1/exercises', exercises)
+    .use('/api/v1/exercises', requireLogin(), exercises)
     .use('/api/v1/workouts', workouts)
+    .use('/api/v1/users', users)
 
 // Catch all
 app.get('*', (req, res) => {
