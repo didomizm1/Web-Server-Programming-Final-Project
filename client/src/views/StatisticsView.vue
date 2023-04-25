@@ -18,7 +18,7 @@ getWorkouts().then((data) => {
 // Get all exercises associated with logged in user
 const exercises = ref<Exercise[]>([]);
 getExercises().then((data) => {
-  exercises.value = data.data.filter(e => e.userID === session.user?.id);
+  exercises.value = data.data.filter(e => e.userID === session.user?._id);
   categorizeExercises();
 });
 
@@ -78,7 +78,7 @@ function computations() {
 
             // Increment data value for total calories burned
             // Multiplies calories burned per minute for the workout used in the exercise by the duration of the exercise to get calories burned for the exercise
-            newExerciseDayData.calories += (workouts.value.find(w => w.id == currentExercise.workoutID)!.caloriesPerMinute * currentExercise.duration);
+            newExerciseDayData.calories += (workouts.value.find(w => w._id == currentExercise.workoutID)!.caloriesPerMinute * currentExercise.duration);
         })
 
         // Convert duration minutes to hours and divide distance by duration for pace

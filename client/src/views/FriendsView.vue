@@ -15,7 +15,7 @@ const session = useSession();
 // Get all users that are friends of the logged in user
 const users = ref<User[]>([]);
 getUsers().then((data) => {
-  users.value = data.data.filter(u => session.user?.friendsUserIDs.includes(u.id));
+  users.value = data.data.filter(u => session.user?.friendsUserIDs.includes(u._id));
 });
 
 // Get all exercises of logged in user's friends
@@ -51,16 +51,16 @@ getWorkouts().then((data) => {
       </template>
 
       <template #name>
-        {{ users.find(u => u.id === exercise.userID)?.firstName }} {{ users.find(u => u.id === exercise.userID)?.lastName }}
+        {{ users.find(u => u._id === exercise.userID)?.firstName }} {{ users.find(u => u._id === exercise.userID)?.lastName }}
       </template>
       <template #username>
-        {{ users.find(u => u.id === exercise.userID)?.username }}
+        {{ users.find(u => u._id === exercise.userID)?.username }}
       </template>
       <template #timestamp>
         {{ exercise.date }}
       </template>
       <template #workout>
-        {{ workouts.find(w => w.id === exercise.workoutID)?.name }}
+        {{ workouts.find(w => w._id === exercise.workoutID)?.name }}
       </template>
       <template #location>
         {{ exercise.location }}

@@ -30,7 +30,7 @@ getUsers().then((data) => {
                 </tr>
             </thead>
             <tbody>
-                <tr v-for="user in users" :key="user.id">
+                <tr v-for="user in users" :key="user._id">
                     <td> 
                         <img :src="user.profilePicture" alt="" class="user-profile-picture">
                     </td>

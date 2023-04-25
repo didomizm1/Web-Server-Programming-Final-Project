@@ -17,7 +17,7 @@ const session = useSession();
 // Get all exercises associated with logged in user
 const exercises = ref<Exercise[]>([]);
 getExercises().then((data) => {
-  exercises.value = data.data.filter(e => e.userID === session.user?.id);
+  exercises.value = data.data.filter(e => e.userID === session.user?._id);
 });
 
 // Get all workouts
@@ -234,7 +234,7 @@ function updateData() {
         {{ exercise.date }}
       </template>
       <template #workout>
-        {{ workouts.find(w => w.id === exercise.workoutID)?.name }}
+        {{ workouts.find(w => w._id === exercise.workoutID)?.name }}
       </template>
       <template #location>
         {{ exercise.location }}

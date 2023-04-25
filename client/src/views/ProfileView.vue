@@ -13,7 +13,7 @@ const session = useSession();
 // Get all exercises associated with logged in user
 const exercises = ref<Exercise[]>([]);
 getExercises().then((data) => {
-  exercises.value = data.data.filter(e => e.userID === session.user?.id);
+  exercises.value = data.data.filter(e => e.userID === session.user?._id);
 });
 
 // Edit profile form modal functionality
