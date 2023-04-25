@@ -7,7 +7,7 @@ import NavLogo from './NavLogo.vue';
     <footer class="footer has-background-black-ter">
         <nav class="level">
             <RouterLink class="level-item" to="/">
-                <NavLogo />
+                <NavLogo class="nav-logo"/>
             </RouterLink>
 
             <RouterLink class="level-item has-text-grey-lighter mt-5" to="/">
@@ -37,5 +37,8 @@ import NavLogo from './NavLogo.vue';
 .footer {
     padding-top: 6rem;
     padding-bottom: 6rem;
+}
+.nav-logo {
+    padding-top: 2rem;
 }
 </style>

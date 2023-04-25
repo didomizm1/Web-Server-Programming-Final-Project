@@ -6,20 +6,42 @@ import CustomLevel from './CustomLevel.vue';
     <!-- Container for statistics about a single day of exercises -->
         <div class="box has-background-warning-light">
             <CustomLevel>
-                <slot name="date"></slot>
+                <div class="heading"><slot name="date"></slot></div>
+            </CustomLevel>
+            <br>
+
+            <CustomLevel>
+                <div class="heading">Distance:</div>
             </CustomLevel>
             <CustomLevel>
-                <slot name="distance"></slot>
+                <div class="title"><slot name="distance"></slot></div>
+            </CustomLevel>
+            <br>
+
+            <CustomLevel>
+                <div class="heading">Duration:</div>
             </CustomLevel>
             <CustomLevel>
-                <slot name="duration"></slot>
+                <div class="title"><slot name="duration"></slot></div>
+            </CustomLevel>
+            <br>
+
+            <CustomLevel>
+                <div class="heading">Pace:</div>
             </CustomLevel>
             <CustomLevel>
-                <slot name="pace"></slot>
+                <div class="title"><slot name="pace"></slot></div>
+            </CustomLevel>
+            <br>
+
+            <CustomLevel>
+                <div class="heading">Calories Burned:</div>
             </CustomLevel>
             <CustomLevel>
-                <slot name="calories"></slot>
+                <div class="title"><slot name="calories"></slot></div>
             </CustomLevel>
+            <br>
+
         </div>
 </template>
 
