@@ -3,7 +3,7 @@ import { api } from "./session";
 
 // Blueprint for an exercise
 export interface Exercise {
-    id: string;
+    _id: string;
     userID: string;
     workoutID: string;
     location: string;

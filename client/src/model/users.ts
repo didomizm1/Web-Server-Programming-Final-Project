@@ -3,14 +3,17 @@ import { api } from "./session";
 
 // Blueprint for a user
 export interface User {
-    id: string;
+    _id: string;
     username: string;
+    password: string;
     email: string;
     firstName: string;
     lastName: string;
     birthday: string;
     friendsUserIDs: string[];
+    role: string;
     profilePicture?: string;
+    token?: string;
 }
 
 // Function to get users

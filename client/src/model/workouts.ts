@@ -3,7 +3,7 @@ import { api } from "./session";
 
 // Blueprint for a workout
 export interface Workout {
-    id: string;
+    _id: string;
     name: string;
     caloriesPerMinute: number;
 }
