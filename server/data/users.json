@@ -1,40 +1,28 @@
 {
     "users": [
         {
-            "id": 0,
             "username": "testuser1",
             "email": "testemail1@email.com",
             "firstName": "Test",
             "lastName": "User1",
             "birthday": "0/0/0000",
-            "friendsUserIDs": [
-                1,
-                2
-            ]
+            "friendsUserIDs": []
         },
         {
-            "id": 1,
             "username": "testuser2",
             "email": "testemail2@email.com",
             "firstName": "Test",
             "lastName": "User2",
             "birthday": "0/0/0000",
-            "friendsUserIDs": [
-                0,
-                2
-            ]
+            "friendsUserIDs": []
         },
         {
-            "id": 2,
             "username": "testuser3",
             "email": "testemail3@email.com",
             "firstName": "Test",
             "lastName": "User3",
             "birthday": "0/0/0000",
-            "friendsUserIDs": [
-                0,
-                1
-            ]
+            "friendsUserIDs": []
         }
     ]
 }

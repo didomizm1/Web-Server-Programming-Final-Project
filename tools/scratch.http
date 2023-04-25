@@ -1,0 +1,17 @@
+###
+POST http://localhost:3070/api/v1/exercises/seed
+
+###
+POST http://localhost:3070/api/v1/workouts/seed
+
+###
+POST http://localhost:3070/api/v1/users/seed
+
+###
+POST http://localhost:3070/api/v1/users/login
+Content-Type: application/json
+
+{
+    "email": "testuser1@mail.com",
+    "password": "123456"
+}

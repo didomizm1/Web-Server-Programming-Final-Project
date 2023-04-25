@@ -1,17 +1,14 @@
 {
     "workouts": [
         {
-            "id": 0,
             "name": "Running",
             "caloriesPerMinute": 15
         },
         {
-            "id": 1,
             "name": "Swimming",
             "caloriesPerMinute": 7.5
         },
         {
-            "id": 2,
             "name": "Ice Skating",
             "caloriesPerMinute": 12.5
         }
