@@ -15,3 +15,6 @@ Content-Type: application/json
     "email": "testuser1@mail.com",
     "password": "123456"
 }
+
+###
+GET http://localhost:3070/api/v1/users/64473d2863c07d23b9dcf7e7
