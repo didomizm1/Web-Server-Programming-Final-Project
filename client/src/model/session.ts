@@ -1,4 +1,4 @@
-import { reactive } from "vue";
+import { reactive, type Ref } from "vue";
 import { useRouter } from "vue-router";
 import * as myFetch from "./myFetch";
 import type { User } from "./users";
@@ -44,15 +44,14 @@ export function api(url: string, data?: any, method?: string, headers?: any) {
 }
 
 // Login function
-export function useLogin() {
+export function useLogin(emailRef: Ref<string | undefined>, passwordRef: Ref<string | undefined>) {
     const router = useRouter();
     
     // Assigns user data to the session and redirects to the home page
     return async function() {
-        
         const response = await api("users/login", {
-            "email": "testuser1@mail.com",
-            "password": "123456"
+            "email": emailRef.value,
+            "password": passwordRef.value
         });
         
         session.user = response.data.user;

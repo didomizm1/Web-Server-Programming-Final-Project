@@ -22,7 +22,7 @@ router
         
     })
 
-    .get('/:id', requireLogin(), (req, res, next) => {
+    .get('/:id', requireLogin(true), (req, res, next) => {
 
         model.getById(req.params.id)
             .then(x => {
