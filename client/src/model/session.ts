@@ -1,7 +1,7 @@
 import { reactive } from "vue";
 import { useRouter } from "vue-router";
 import * as myFetch from "./myFetch";
-import { getUserByID, type User } from "./users";
+import type { User } from "./users";
 
 // Reactive session object
 const session = reactive({
@@ -22,6 +22,14 @@ export function useSession() {
 // Function for myFetch api
 export function api(url: string, data?: any, method?: string, headers?: any) {
     session.isLoading = true;
+    
+    if(session.user?.token){
+        headers = {
+            "Authorization": `Bearer ${session.user.token}`,
+            ...headers,
+        }
+    }
+    
     return myFetch.api(url, data, method, headers)
         .catch(err => {
             console.error({err});
@@ -38,13 +46,22 @@ export function api(url: string, data?: any, method?: string, headers?: any) {
 // Login function
 export function useLogin() {
     const router = useRouter();
-
+    
     // Assigns user data to the session and redirects to the home page
-    return function() {
-        console.log({ router });
-        getUserByID("64473d2863c07d23b9dcf7e7").then((data) => {
-            session.user = data.data;
+    return async function() {
+        
+        const response = await api("users/login", {
+            "email": "testuser1@mail.com",
+            "password": "123456"
         });
+        
+        session.user = response.data.user;
+        if(!session.user) {
+            addMessage("User not found", "danger");
+            return;
+        }
+        session.user.token = response.data.token;
+
         router.push(session.redirectUrl ?? "/");
         session.redirectUrl = null;
     }
