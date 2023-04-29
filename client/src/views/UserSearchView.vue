@@ -1,8 +1,13 @@
 <script setup lang="ts">
 import { ref } from 'vue';
+import { useSession } from '../model/session';
 import { getUsers, type User } from '../model/users'
 import Banner from '../components/Banner.vue';
 
+// Reactive session object
+const session = useSession();
+
+// Get all users
 const users = ref<User[]>([]);
 getUsers().then((data) => {
     users.value = data.data;
@@ -26,7 +31,7 @@ getUsers().then((data) => {
                     <th></th>
                     <th scope="col">Username</th>
                     <th scope="col">First Name</th>
-                    <th></th>
+                    <th v-if="session.user"></th>
                 </tr>
             </thead>
             <tbody>
@@ -36,7 +41,7 @@ getUsers().then((data) => {
                     </td>
                     <td>{{ user.username }}</td>
                     <td>{{ user.firstName }}</td>
-                    <td>
+                    <td v-if="session.user">
                         <button class="button" @click="">
                             <div class="icon">
                                 <i class="fas fa-user-plus"></i>
