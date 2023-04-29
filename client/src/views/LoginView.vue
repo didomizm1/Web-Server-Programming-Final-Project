@@ -77,9 +77,6 @@ const login = useLogin(formEmail, formPassword);
           <button class="button"><strong>Log In</strong></button>
         </template>
 
-        <template #help>
-          *Temporarily use this login button without any information to gain access to a test account
-        </template>
         <template #error>
           Invalid username or password
         </template>

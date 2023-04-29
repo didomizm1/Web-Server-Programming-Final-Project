@@ -35,7 +35,7 @@ app
     .get('/api/v1/', (req, res) => {
         res.send('Hello New York Rangers! From Express')
     })
-    .use('/api/v1/exercises', requireLogin(), exercises)
+    .use('/api/v1/exercises', exercises)
     .use('/api/v1/workouts', workouts)
     .use('/api/v1/users', users)
 
