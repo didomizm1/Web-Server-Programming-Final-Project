@@ -6,7 +6,7 @@ import CustomLevel from './CustomLevel.vue';
     <!-- Container for statistics about a single day of exercises -->
         <div class="box has-background-warning-light">
             <CustomLevel>
-                <div class="heading"><slot name="date"></slot></div>
+                <div class="title"><i><u><slot name="date"></slot></u></i></div>
             </CustomLevel>
             <br>
 

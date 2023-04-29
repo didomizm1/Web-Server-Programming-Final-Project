@@ -14,7 +14,7 @@
             <div class="media-content">
                 <div class="content">
                     <p>
-                        <strong><slot name="name"></slot></strong> <small>(<slot name="username"></slot>) at <slot name="timestamp"></slot></small>
+                        <strong><slot name="name"></slot></strong> <small>(<slot name="username"></slot>) on <slot name="timestamp"></slot></small>
                         <br>
                         <slot name="workout"></slot> in <slot name="location"></slot>
                         <div class="columns top-columns">
