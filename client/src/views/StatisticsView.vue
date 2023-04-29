@@ -73,16 +73,16 @@ function computations() {
         // Iterate through exercises within an array
         currentDayExercises.forEach(currentExercise => {
             // Increment data values for distance and duration
-            newExerciseDayData.distance += currentExercise.distance;
-            newExerciseDayData.duration += currentExercise.duration;
+            newExerciseDayData.distance += Number(currentExercise.distance.toFixed(2));
+            newExerciseDayData.duration += Number(currentExercise.duration.toFixed(2));
 
             // Increment data value for total calories burned
             // Multiplies calories burned per minute for the workout used in the exercise by the duration of the exercise to get calories burned for the exercise
-            newExerciseDayData.calories += (workouts.value.find(w => w._id == currentExercise.workoutID)!.caloriesPerMinute * currentExercise.duration);
+            newExerciseDayData.calories += Number((workouts.value.find(w => w._id == currentExercise.workoutID)!.caloriesPerMinute * currentExercise.duration).toFixed(2));
         })
 
         // Convert duration minutes to hours and divide distance by duration for pace
-        newExerciseDayData.pace = (newExerciseDayData.distance/(newExerciseDayData.duration/60));
+        newExerciseDayData.pace = Number((newExerciseDayData.distance/(newExerciseDayData.duration/60)).toFixed(2));
 
         // Add object to array
         computedData.value.push(newExerciseDayData);
