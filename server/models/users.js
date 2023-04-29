@@ -73,8 +73,8 @@ async function update(item) {
     console.log(item);
     const col = await collection();
     const result = await col.findOneAndUpdate(
-        { _id: new ObjectId(item.id) },
-        { $set: item },
+        { _id: new ObjectId(item._id) },
+        { $set: item.user },
         { returnDocument: 'after' }
     );
 

@@ -15,7 +15,7 @@ const session = useSession();
 // Get all users that are friends of the logged in user
 const users = ref<User[]>([]);
 getUsers().then((data) => {
-  users.value = data.data.filter(u => session.user?.friendsUserIDs.includes(u._id));
+  users.value = data.data.filter(u => session.user?.friendsUserIDs.includes(u._id as string));
 });
 
 // Get all exercises of logged in user's friends

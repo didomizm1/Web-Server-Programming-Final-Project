@@ -41,7 +41,7 @@ let newExerciseWorkoutName = ref("");
 // Save new exercise
 function updateData() {
   // Append current user ID and workout ID to exercise data
-  newExercise.value.userID = session.user!._id;
+  newExercise.value.userID = session.user!._id as string;
   newExercise.value.workoutID = workouts.value.find(w => w.name === newExerciseWorkoutName.value)!._id;
 
   // Update Database

@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref } from 'vue';
-import { useSession } from '../model/session';
-import { getUsers, type User } from '../model/users'
+import { addMessage, useSession } from '../model/session';
+import { getUsers, updateUser, type User, type UserPackage } from '../model/users'
 import Banner from '../components/Banner.vue';
 
 // Reactive session object
@@ -12,6 +12,34 @@ const users = ref<User[]>([]);
 getUsers().then((data) => {
     users.value = data.data;
 });
+
+// Save information about newly added friend to the database
+function updateData(newFriendID: string) {
+    // Update session with new data
+    session.user?.friendsUserIDs.push(newFriendID);
+
+    // Remove _id from data to be sent
+    const userToSend = {
+        username: session.user?.username,
+        password: session.user?.password,
+        email: session.user?.email,
+        firstName: session.user?.firstName,
+        lastName: session.user?.lastName,
+        birthday: session.user?.birthday,
+        friendsUserIDs: session.user?.friendsUserIDs,
+        role: session.user?.role,
+        joinDate: session.user?.joinDate,
+    } as User;
+
+    // Package user with external _id
+    const userPackage = { _id: session.user?._id, user: userToSend } as UserPackage;
+
+    // Send data to be saved
+    updateUser(userPackage).then((data) => {
+        console.log(data);
+        addMessage('User friends list updated', 'success');
+    });
+}
 
 </script>
 
@@ -42,7 +70,7 @@ getUsers().then((data) => {
                     <td>{{ user.username }}</td>
                     <td>{{ user.firstName }}</td>
                     <td v-if="session.user">
-                        <button class="button" @click="">
+                        <button class="button" @click="updateData(user._id as string)" v-if="session.user._id != user._id && !session.user.friendsUserIDs.includes(user._id as string)">
                             <div class="icon">
                                 <i class="fas fa-user-plus"></i>
                             </div>
