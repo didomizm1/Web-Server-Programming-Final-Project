@@ -13,10 +13,16 @@ getUsers().then((data) => {
     users.value = data.data;
 });
 
-// Save information about newly added friend to the database
-function updateData(newFriendID: string) {
+// Save information updated user
+function updateData(friendID: string, mode: string) {
     // Update session with new data
-    session.user?.friendsUserIDs.push(newFriendID);
+    // If adding a friend, push, otherwise splice
+    if (mode == "add") {
+        session.user?.friendsUserIDs.push(friendID);
+    } else if (mode == "remove") {
+        const index = session.user?.friendsUserIDs.indexOf(friendID) as number;
+        session.user?.friendsUserIDs.splice(index, 1);
+    }
 
     // Remove _id from data to be sent
     const userToSend = {
@@ -70,11 +76,18 @@ function updateData(newFriendID: string) {
                     <td>{{ user.username }}</td>
                     <td>{{ user.firstName }}</td>
                     <td v-if="session.user">
-                        <button class="button" @click="updateData(user._id as string)" v-if="session.user._id != user._id && !session.user.friendsUserIDs.includes(user._id as string)">
-                            <div class="icon">
-                                <i class="fas fa-user-plus"></i>
-                            </div>
-                        </button>
+                        <template v-if="session.user._id != user._id">
+                            <button class="button" @click="updateData(user._id as string, 'add')" v-if="!session.user.friendsUserIDs.includes(user._id as string)">
+                                <div class="icon">
+                                    <i class="fas fa-user-plus"></i>
+                                </div>
+                            </button>
+                            <button class="button" @click="updateData(user._id as string, 'remove')" v-else>
+                                <div class="icon">
+                                    <i class="fas fa-user-minus"></i>
+                                </div>
+                            </button>
+                        </template>
                     </td>
                 </tr>
             </tbody>
