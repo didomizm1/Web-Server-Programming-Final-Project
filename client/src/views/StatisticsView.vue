@@ -13,14 +13,17 @@ const session = useSession();
 const workouts = ref<Workout[]>([]);
 getWorkouts().then((data) => {
   workouts.value = data.data;
+  allowGetExercises();
 });
 
 // Get all exercises associated with logged in user
 const exercises = ref<Exercise[]>([]);
-getExercises().then((data) => {
-  exercises.value = data.data.filter(e => e.userID === session.user?._id);
-  categorizeExercises();
-});
+function allowGetExercises() {
+    getExercises().then((data) => {
+        exercises.value = data.data.filter(e => e.userID === session.user?._id);
+        categorizeExercises();
+    });
+}
 
 // Blueprint for an object containing data about a single day's exercises
 interface ExerciseDayData {
