@@ -48,6 +48,7 @@ import CustomLevel from './CustomLevel.vue';
 <style scoped>
 .box {
     outline: solid 5px;
+    box-shadow: 10px 10px 10px;
     margin-bottom: 5rem;
 }
 </style>

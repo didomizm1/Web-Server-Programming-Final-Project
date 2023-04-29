@@ -4,7 +4,7 @@ import PageBox from './PageBox.vue';
 
 <template>
     <!-- Custom form component -->
-    <form class="block">
+    <form class="block" novalidate>
         <PageBox>
             <slot></slot>
         </PageBox>

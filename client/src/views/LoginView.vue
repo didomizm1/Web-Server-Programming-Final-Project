@@ -28,7 +28,7 @@ const login = useLogin(formEmail, formPassword);
   </Banner>
   
   <!-- Login form -->
-  <form class="block" @submit.prevent="login()">
+  <form class="block" novalidate @submit.prevent="login()">
     <PageBox>
       <FormField>
           <template #label>
@@ -77,6 +77,9 @@ const login = useLogin(formEmail, formPassword);
           <button class="button"><strong>Log In</strong></button>
         </template>
 
+        <template #help>
+          FOR TESTING PURPOSES: Use the e-mail "testuser1@mail.com" and the password "123456", both without quotations
+        </template>
         <template #error>
           Invalid username or password
         </template>
