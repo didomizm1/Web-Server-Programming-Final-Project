@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref } from 'vue';
-import { useSession } from '../model/session';
-import { getExercises, type Exercise } from '../model/exercises';
+import { addMessage, useSession } from '../model/session';
+import { getExercises, createExercise, type Exercise } from '../model/exercises';
 import { getWorkouts, type Workout } from '../model/workouts';
 import Banner from '../components/Banner.vue';
 import CustomLevel from '../components/CustomLevel.vue';
@@ -34,9 +34,25 @@ function toggleModal() {
   console.log({ isModalActive });
 }
 
+// Refs to hold form data about a newly created exercise
+let newExercise = ref<Exercise>({} as Exercise);
+let newExerciseWorkoutName = ref("");
+
 // Save new exercise
 function updateData() {
+  // Append current user ID and workout ID to exercise data
+  newExercise.value.userID = session.user!._id;
+  newExercise.value.workoutID = workouts.value.find(w => w.name === newExerciseWorkoutName.value)!._id;
 
+  // Update Database
+  createExercise(newExercise.value).then((data) => {
+    console.log(data);
+    addMessage('Exercise created', 'success');
+  });
+
+  // Reset exercise refs to a default state to be ready for the next exercise addition
+  newExercise = ref<Exercise>({} as Exercise);
+  newExerciseWorkoutName = ref("");
 }
 
 </script>
@@ -53,10 +69,12 @@ function updateData() {
   </Banner>
 
   <!-- Add new exercise button and modal -->
-  <CustomLevel class="mb-6">
-    <button class="button is-danger is-rounded" @click="toggleModal()">Add New Exercise</button>
-  </CustomLevel>
-
+  <div class="container">
+    <CustomLevel class="mb-6">
+      <button class="button is-danger is-rounded" @click="toggleModal()">Add New Exercise</button>
+    </CustomLevel>
+  </div>
+  
   <div class="modal" :class="{ 'is-active': isModalActive }">
     <div class="modal-background"></div>
 
@@ -67,7 +85,7 @@ function updateData() {
       </header>
 
       <section class="modal-card-body">
-        <form @submit.prevent="updateData()">
+        <form novalidate @submit.prevent="updateData()">
           <FormField>
             <template #label>
               Exercise Picture
@@ -102,7 +120,8 @@ function updateData() {
 
             <template #input>
               <div class="select is-rounded">
-                <select>
+                <select v-model="newExerciseWorkoutName">
+                  <option disabled value="">Select Workout</option>
                   <template v-for="workout, i in workouts">
                     <option>
                       {{ workout.name }}
@@ -126,7 +145,7 @@ function updateData() {
             </template>
 
             <template #input>
-              <input class="input" type="text" placeholder="Enter location">
+              <input class="input" type="text" placeholder="Enter location" v-model="newExercise.location">
             </template>
 
             <template #leftIcon>
@@ -146,7 +165,7 @@ function updateData() {
             </template>
 
             <template #input>
-              <input class="input" type="number" min="0" step=".1" placeholder="Enter distance in miles">
+              <input class="input" type="number" min="0" step=".1" placeholder="Enter distance in miles" v-model="newExercise.distance">
             </template>
 
             <template #leftIcon>
@@ -166,7 +185,7 @@ function updateData() {
             </template>
 
             <template #input>
-              <input class="input" type="number" min="0" step=".1" placeholder="Enter duration in minutes">
+              <input class="input" type="number" min="0" step=".1" placeholder="Enter duration in minutes" v-model="newExercise.duration">
             </template>
 
             <template #leftIcon>
@@ -184,7 +203,7 @@ function updateData() {
             </template>
 
             <template #input>
-              <input class="input date" type="date">
+              <input class="input date" type="date" v-model="newExercise.date">
             </template>
 
             <template #leftIcon>
