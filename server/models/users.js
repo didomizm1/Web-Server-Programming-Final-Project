@@ -14,7 +14,8 @@ const data = [
         "lastName": "User1",
         "birthday": "5/5/1900",
         "friendsUserIDs": [],
-        "role": "",
+        "role": "user",
+        "joinDate": "3/18/2023",
     },
     {
         "username": "testUser2",
@@ -24,7 +25,8 @@ const data = [
         "lastName": "User2",
         "birthday": "5/6/1900",
         "friendsUserIDs": [],
-        "role": "",
+        "role": "user",
+        "joinDate": "3/19/2023",
     },
     {
         "username": "testUser3",
@@ -34,7 +36,8 @@ const data = [
         "lastName": "User3",
         "birthday": "5/7/1900",
         "friendsUserIDs": [],
-        "role": "",
+        "role": "user",
+        "joinDate": "3/20/2023",
     },
 ]
 

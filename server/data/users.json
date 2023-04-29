@@ -7,7 +7,9 @@
             "firstName": "Test",
             "lastName": "User1",
             "birthday": "0/0/0000",
-            "friendsUserIDs": []
+            "friendsUserIDs": [],
+            "role": "user",
+            "joinDate": "3/18/2023"
         },
         {
             "username": "testuser2",
@@ -16,7 +18,9 @@
             "firstName": "Test",
             "lastName": "User2",
             "birthday": "0/0/0000",
-            "friendsUserIDs": []
+            "friendsUserIDs": [],
+            "role": "user",
+            "joinDate": "3/19/2023"
         },
         {
             "username": "testuser3",
@@ -25,7 +29,9 @@
             "firstName": "Test",
             "lastName": "User3",
             "birthday": "0/0/0000",
-            "friendsUserIDs": []
+            "friendsUserIDs": [],
+            "role": "user",
+            "joinDate": "3/20/2023"
         }
     ]
 }

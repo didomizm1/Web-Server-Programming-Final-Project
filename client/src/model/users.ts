@@ -12,6 +12,7 @@ export interface User {
     birthday: string;
     friendsUserIDs: string[];
     role: string;
+    joinDate: string;
     profilePicture?: string;
     token?: string;
 }

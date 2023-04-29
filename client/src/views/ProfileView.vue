@@ -69,7 +69,7 @@ function updateData() {
 
       <!-- Join date -->
       <CustomLevel class="mt-4">
-        <p class="title date-text">Joined 3/18/2023</p>
+        <p class="title date-text">Joined {{ session.user.joinDate }}</p>
       </CustomLevel>
 
       <!-- Horizontal Divider -->
@@ -129,7 +129,7 @@ function updateData() {
           </header>
 
           <section class="modal-card-body">
-            <form @submit.prevent="updateData()">
+            <form novalidate @submit.prevent="updateData()">
               <FormField>
                 <template #label>
                   Profile Picture
