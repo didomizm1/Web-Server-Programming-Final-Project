@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { ref } from 'vue';
-import { useSession } from '../model/session';
+import { addMessage, useSession } from '../model/session';
+import { updateUser, type User, type UserPackage } from '../model/users';
 import { getExercises, type Exercise } from '../model/exercises';
 import ProfilePicture from '../components/ProfilePicture.vue';
 import CustomLevel from '../components/CustomLevel.vue';
@@ -24,29 +25,36 @@ function toggleModal() {
   console.log({ isModalActive });
 }
 
-// Reset values in the modal to their defaults
-const usernameDefault = ref(session.user?.username);
-const emailDefault = ref(session.user?.email);
-const firstNameDefault = ref(session.user?.firstName);
-const lastNameDefault = ref(session.user?.lastName);
-const birthdayDefault = ref(session.user?.birthday);
-
-function resetValues() {
-  usernameDefault.value = "";
-  usernameDefault.value = session.user?.username;
-  emailDefault.value = "";
-  emailDefault.value = session.user?.email;
-  firstNameDefault.value = "";
-  firstNameDefault.value = session.user?.firstName;
-  lastNameDefault.value = "";
-  lastNameDefault.value = session.user?.lastName;
-  birthdayDefault.value = "";
-  birthdayDefault.value = session.user?.birthday;
-}
+// Ref to hold form data about updated user profile information
+let updatedUser = ref<User>({
+  username: session.user?.username,
+  password: session.user?.password,
+  email: session.user?.email,
+  firstName: session.user?.firstName,
+  lastName: session.user?.lastName,
+  birthday: session.user?.birthday,
+  friendsUserIDs: session.user?.friendsUserIDs,
+  role: session.user?.role,
+  joinDate: session.user?.joinDate,
+} as User);
 
 // Save updated profile information
 function updateData() {
+  // Update session with new data
+  session.user!.username = updatedUser.value.username;
+  session.user!.email = updatedUser.value.email;
+  session.user!.firstName = updatedUser.value.firstName;
+  session.user!.lastName = updatedUser.value.lastName;
+  session.user!.birthday = updatedUser.value.birthday;
 
+  // Package user with external _id
+  const userPackage = { _id: session.user?._id, user: updatedUser.value } as UserPackage;
+
+  // Send data to be saved
+  updateUser(userPackage).then((data) => {
+      console.log(data);
+      addMessage('User profile information updated', 'success');
+  });
 }
 
 </script>
@@ -125,7 +133,7 @@ function updateData() {
         <div class="modal-card">
           <header class="modal-card-head has-background-danger">
             <p class="modal-card-title">Edit Profile Information</p>
-            <button class="modal-close is-large" @click="toggleModal(); resetValues();"></button>
+            <button class="modal-close is-large" @click="toggleModal();"></button>
           </header>
 
           <section class="modal-card-body">
@@ -163,7 +171,7 @@ function updateData() {
                 </template>
 
                 <template #input>
-                  <input class="input" type="text" placeholder="Input username" :value="usernameDefault">
+                  <input class="input" type="text" placeholder="Input username" v-model="updatedUser.username">
                 </template>
 
                 <template #leftIcon>
@@ -173,9 +181,6 @@ function updateData() {
                   <i class="fas fa-check"></i>
                 </template>
 
-                <template #help>
-                  Must be between 8 and 16 characters long (letters or numbers only)
-                </template>
                 <template #success>
                   Valid username
                 </template>
@@ -193,7 +198,7 @@ function updateData() {
                 </template>
 
                 <template #input>
-                  <input class="input" type="email" placeholder="youremail@site.com" :value="emailDefault">
+                  <input class="input" type="email" placeholder="youremail@site.com" v-model="updatedUser.email">
                 </template>
 
                 <template #leftIcon>
@@ -220,7 +225,7 @@ function updateData() {
                 </template>
 
                 <template #input>
-                  <input class="input" type="text" placeholder="Your first name" :value="firstNameDefault">
+                  <input class="input" type="text" placeholder="Your first name" v-model="updatedUser.firstName">
                 </template>
 
                 <template #leftIcon>
@@ -238,7 +243,7 @@ function updateData() {
                 </template>
 
                 <template #input>
-                  <input class="input" type="text" placeholder="Your last name" :value="lastNameDefault">
+                  <input class="input" type="text" placeholder="Your last name" v-model="updatedUser.lastName">
                 </template>
 
                 <template #leftIcon>
@@ -256,7 +261,7 @@ function updateData() {
                 </template>
 
                 <template #input>
-                  <input class="input date" type="date" :value="birthdayDefault">
+                  <input class="input date" type="date" v-model="updatedUser.birthday">
                 </template>
 
                 <template #leftIcon>
