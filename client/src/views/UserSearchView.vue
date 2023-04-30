@@ -3,6 +3,7 @@ import { ref } from 'vue';
 import { addMessage, useSession } from '../model/session';
 import { getUsers, updateUser, type User, type UserPackage } from '../model/users'
 import Banner from '../components/Banner.vue';
+import ProfilePicture from '../components/ProfilePicture.vue';
 
 // Reactive session object
 const session = useSession();
@@ -71,7 +72,7 @@ function updateData(friendID: string, mode: string) {
             <tbody>
                 <tr v-for="user in users" :key="user._id">
                     <td> 
-                        <img :src="user.profilePicture" alt="" class="user-profile-picture">
+                        <ProfilePicture class="user-profile-picture"/>
                     </td>
                     <td>{{ user.username }}</td>
                     <td>{{ user.firstName }}</td>
