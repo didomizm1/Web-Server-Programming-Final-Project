@@ -20,10 +20,10 @@
         <p class="help">
             <slot name="help"></slot>
         </p>
-        <p class="help is-success is-hidden">
+        <p class="help is-success">
             <slot name="success"></slot>
         </p>
-        <p class="help is-danger is-hidden">
+        <p class="help is-danger">
             <slot name="error"></slot>
         </p>
     </div>

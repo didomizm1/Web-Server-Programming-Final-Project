@@ -1,18 +1,44 @@
 <script setup lang="ts">
 import { ref } from 'vue';
-import { useLogin } from '../model/session';
+import { addMessage, useLogin } from '../model/session';
+import { type User, getUsers } from '../model/users';
 import Banner from '../components/Banner.vue';
 import PageBox from '../components/PageBox.vue';
 import FormField from '../components/FormField.vue';
 import PopupMessage from '../components/PopupMessage.vue';
 import SiteLogo from '../components/SiteLogo.vue';
 
+// Get all users
+const users = ref<User[]>([]);
+getUsers().then((data) => {
+    users.value = data.data;
+});
+
 // Refs to hold information from the form
 const formEmail = ref<string>();
 const formPassword = ref<string>();
 
+// Ref to hold the state of form field validity
+const validFields = ref(true);
+
 // Login function
 const login = useLogin(formEmail, formPassword);
+
+// Ensure login information is valid
+function validateData() {
+  // Find user in the database by their e-mail
+  const userToLogin = users.value.find(u => u.email === formEmail.value)
+
+  // Check if user exists and if their password is valid
+  if(!userToLogin || userToLogin.password != formPassword.value) {
+    validFields.value = false;
+    console.log("E-mail or password invalid");
+    addMessage('Not logged in; e-mail or password invalid', 'danger');
+  } else {
+    // Proceed to log in
+    login();
+  }
+}
 
 </script>
 
@@ -28,7 +54,7 @@ const login = useLogin(formEmail, formPassword);
   </Banner>
   
   <!-- Login form -->
-  <form class="block" novalidate @submit.prevent="login()">
+  <form class="block" novalidate @submit.prevent="validateData()">
     <PageBox>
       <FormField>
           <template #label>
@@ -81,7 +107,9 @@ const login = useLogin(formEmail, formPassword);
           FOR TESTING PURPOSES: Use the e-mail "testuser1@mail.com" and the password "123456", both without quotations
         </template>
         <template #error>
-          Invalid username or password
+          <div :class="{ 'is-hidden': validFields }">
+            Invalid e-mail or password
+          </div>
         </template>
 
       </FormField>
