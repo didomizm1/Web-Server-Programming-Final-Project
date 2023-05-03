@@ -13,7 +13,7 @@ function hideMenu() {
 
 <template>
     <!-- Message which can be used as a closeable popup on pages -->
-    <div class="container block" :class="{ 'is-hidden': closeButtonClicked }">
+    <div class="container block mb-6" :class="{ 'is-hidden': closeButtonClicked }">
         <article class="message is-danger">
             <div class="message-header">
                 <p>

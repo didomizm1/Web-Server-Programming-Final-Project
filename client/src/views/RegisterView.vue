@@ -111,6 +111,16 @@ function updateData() {
     </template>
   </Banner>
 
+  <!-- Message to advertise registration -->
+  <PopupMessage>
+    <template #header>
+      Already have an account?
+    </template>
+    <template #body>
+      Click the login button to sign in and view your profile!
+    </template>
+  </PopupMessage>
+
   <!-- Registration form -->
   <form class="block" novalidate @submit.prevent="updateData()">
     <PageBox>
@@ -287,16 +297,6 @@ function updateData() {
       </FormField>
     </PageBox>
   </form>
-
-  <!-- Message to advertise registration -->
-  <PopupMessage>
-    <template #header>
-      Already have an account?
-    </template>
-    <template #body>
-      Click the login button to sign in and view your profile!
-    </template>
-  </PopupMessage>
 
   <!-- Site logo on the bottom of the page -->
   <SiteLogo />

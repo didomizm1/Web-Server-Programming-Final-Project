@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { ref } from 'vue';
+import { loadScript, rest } from '../model/myFetch';
 import { addMessage, useLogin } from '../model/session';
 import { type User, getUsers } from '../model/users';
 import Banner from '../components/Banner.vue';
@@ -43,6 +44,30 @@ function validateData() {
   }
 }
 
+// Google login
+async function googleLogin()
+{
+  await loadScript('https://accounts.google.com/gsi/client', 'google-login');
+  
+  const client = google.accounts.oauth2.initTokenClient({
+    client_id: import.meta.env.VITE_GOOGLE_CLIENT_ID,
+    scope: 'https://www.googleapis.com/auth/userinfo.email \
+            https://www.googleapis.com/auth/userinfo.profile',
+    callback: async (tokenResponse) => {
+      console.log(tokenResponse);
+
+      const me = await rest(
+        'https://people.googleapis.com/v1/people/me?personFields=names,emailAddresses',
+        null, undefined, {
+          "Authorization": "Bearer " + tokenResponse.access_token
+        }
+      );
+      console.log(me);
+    },
+  });
+  client.requestAccessToken();
+}
+
 </script>
 
 <template>
@@ -56,6 +81,16 @@ function validateData() {
     </template>
   </Banner>
   
+  <!-- Message to advertise registration -->
+  <PopupMessage>
+    <template #header>
+      Don't have an account?
+    </template>
+    <template #body>
+      Click the sign up button to register for an account on SushiFit today!
+    </template>
+  </PopupMessage>
+
   <!-- Login form -->
   <form class="block" novalidate @submit.prevent="validateData()">
     <PageBox>
@@ -120,15 +155,15 @@ function validateData() {
     </PageBox>
   </form>
 
-  <!-- Message to advertise registration -->
-  <PopupMessage>
-    <template #header>
-      Don't have an account?
-    </template>
-    <template #body>
-      Click the sign up button to register for an account on SushiFit today!
-    </template>
-  </PopupMessage>
+  <!-- Button to log in with Google -->
+  <div class="container">
+    <button class="button is-link is-rounded" @click="googleLogin()">
+      <span class="icon">
+        <i class="fa-brands fa-google"></i>
+      </span>
+      <p>Log in with Google</p>
+    </button>
+  </div>
   
   <!-- Site logo on the bottom of the page -->
   <SiteLogo />
