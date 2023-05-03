@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import PopupMessage from '@/components/PopupMessage.vue';
 import Banner from '../components/Banner.vue';
 </script>
 
@@ -12,6 +13,12 @@ import Banner from '../components/Banner.vue';
       Track your meals below!
     </template>
   </Banner>
+
+  <!-- Work in Progress popup message -->
+  <PopupMessage>
+    <template #header>Work in Progress!</template>
+    <template #body>Please be patient while we construct more features for our site.</template>
+  </PopupMessage>
 
 </template>
 
