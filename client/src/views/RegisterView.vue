@@ -41,7 +41,7 @@ const newUser = ref<User>({
   birthday: "",
   friendsUserIDs: [],
   role: "user",
-  joinDate: `${date.getFullYear()}-${date.getMonth()}-${date.getDay()}`,
+  joinDate: `${date.getFullYear()}-${(date.getMonth() + 1).toString().padStart(2, '0')}-${date.getDay().toString().padStart(2, '0')}`,
 } as User);
 
 // Save information about a new user to the database
