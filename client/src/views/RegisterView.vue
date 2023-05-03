@@ -25,6 +25,7 @@ getUsers().then((data) => {
 const date = new Date();
 
 // Refs to hold the state of validity of required form fields
+const validForm = ref(true);
 const validEmail = ref(true);
 const validPassword = ref(true);
 const validUsername = ref(true);
@@ -51,6 +52,7 @@ function updateData() {
 
   // Check if the e-mail already exists in the database or if the e-mail matches the specifications
   if (users.value.find(u => u.email === newUser.value.email) || !/^[^@]*@[^@.]*\.[^@.]*$/.test(newUser.value.email)) {
+    validForm.value = false;
     validEmail.value = false;
     console.log('Invalid e-mail!');
     addMessage('User not created; email invalid', 'danger');
@@ -60,6 +62,7 @@ function updateData() {
 
   // Check if password matches the specifications
   if (!/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%&?_])[a-zA-Z\d!@#$%&?_]{8,}$/.test(newUser.value.password)) {
+    validForm.value = false;
     validPassword.value = false;
     console.log('Invalid password!');
     addMessage('User not created; password invalid', 'danger');
@@ -69,6 +72,7 @@ function updateData() {
 
   // Check if re-entered password matches the first password
   if (reenteredPassword.value != newUser.value.password) {
+    validForm.value = false;
     passwordMatches.value = false;
     console.log('Passwords do not match!');
     addMessage('User not created; passwords do not match', 'danger');
@@ -78,6 +82,7 @@ function updateData() {
   
   // Check if the username already exists in the database or if the username matches the specifications
   if (users.value.find(u => u.username.toLowerCase() === newUser.value.username.toLowerCase()) || !/^(?=.*[a-zA-Z])(?=.*\d)[a-zA-Z\d]{8,16}$/.test(newUser.value.username)) {
+    validForm.value = false;
     validUsername.value = false;
     console.log('Invalid username!');
     addMessage('User not created; username invalid', 'danger');
@@ -292,6 +297,15 @@ function updateData() {
 
         <template #input>
           <button class="button"><strong>Sign Up</strong></button>
+        </template>
+
+        <template #help>
+          <strong>* Indicates required fields</strong>
+        </template>
+        <template #error>
+          <div :class="{ 'is-hidden': validForm }">
+            Fix errors and resubmit
+          </div>
         </template>
 
       </FormField>
