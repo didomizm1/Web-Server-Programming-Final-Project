@@ -104,10 +104,6 @@ function updateData() {
                 </template>
               </FileFormField>
             </template>
-            
-            <template #success>
-              File uploaded
-            </template>
 
           </FormField>
 

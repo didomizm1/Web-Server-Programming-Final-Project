@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 import { addMessage, useSession } from '../model/session';
-import { updateUser, type User, type UserPackage } from '../model/users';
+import { getUsers, updateUser, type User, type UserPackage } from '../model/users';
 import { getExercises, type Exercise } from '../model/exercises';
 import ProfilePicture from '../components/ProfilePicture.vue';
 import CustomLevel from '../components/CustomLevel.vue';
@@ -15,6 +15,12 @@ const session = useSession();
 const exercises = ref<Exercise[]>([]);
 getExercises().then((data) => {
   exercises.value = data.data.filter(e => e.userID === session.user?._id);
+});
+
+// Get all users
+const users = ref<User[]>([]);
+getUsers().then((data) => {
+    users.value = data.data;
 });
 
 // Edit profile form modal functionality
@@ -38,23 +44,51 @@ let updatedUser = ref<User>({
   joinDate: session.user?.joinDate,
 } as User);
 
+// Refs to hold the state of validity of form fields
+const validEmail = ref(true);
+const validUsername = ref(true);
+
 // Save updated profile information
-function updateData() {
-  // Update session with new data
-  session.user!.username = updatedUser.value.username;
-  session.user!.email = updatedUser.value.email;
-  session.user!.firstName = updatedUser.value.firstName;
-  session.user!.lastName = updatedUser.value.lastName;
-  session.user!.birthday = updatedUser.value.birthday;
+function updateData() { 
+  // Check if the e-mail already exists in the database or if the e-mail matches the specifications; always allow a user to reclaim any case variation of their current email
+  if (updatedUser.value.email.toLowerCase() != session.user?.email.toLowerCase() && (users.value.find(u => u.email.toLowerCase() === updatedUser.value.email.toLowerCase()) || !/^[^@]*@[^@.]*\.[^@.]*$/.test(updatedUser.value.email))) {
+    validEmail.value = false;
+    console.log('Invalid e-mail!');
+    addMessage('Profile not updated; email invalid', 'danger');
+  } else {
+    validEmail.value = true;
+  }
+  
+  // Check if the username already exists in the database or if the username matches the specifications; always allow a user to reclaim any case variation of their current username
+  if (updatedUser.value.username.toLowerCase() != session.user?.username.toLowerCase() && (users.value.find(u => u.username.toLowerCase() === updatedUser.value.username.toLowerCase()) || !/^(?=.*[a-zA-Z])(?=.*\d)[a-zA-Z\d]{8,16}$/.test(updatedUser.value.username))) {
+    validUsername.value = false;
+    console.log('Invalid username!');
+    addMessage('Profile not updated; username invalid', 'danger');
+  } else {
+    validUsername.value = true;
+  }
 
-  // Package user with external _id
-  const userPackage = { _id: session.user?._id, user: updatedUser.value } as UserPackage;
+  // Update user if form data is valid
+  if (validEmail.value && validUsername.value) {
+    // Update session with new data
+    session.user!.email = updatedUser.value.email;
+    session.user!.username = updatedUser.value.username;
+    session.user!.firstName = updatedUser.value.firstName;
+    session.user!.lastName = updatedUser.value.lastName;
+    session.user!.birthday = updatedUser.value.birthday;
 
-  // Send data to be saved
-  updateUser(userPackage).then((data) => {
-      console.log(data);
-      addMessage('User profile information updated', 'success');
-  });
+    // Package user with external _id
+    const userPackage = { _id: session.user?._id, user: updatedUser.value } as UserPackage;
+
+    // Send data to be saved
+    updateUser(userPackage).then((data) => {
+        console.log(data);
+        addMessage('User profile information updated', 'success');
+    });
+
+    // Close modal
+    toggleModal();
+  }
 }
 
 </script>
@@ -156,9 +190,31 @@ function updateData() {
                     </template>
                   </FileFormField>
                 </template>
-                
-                <template #success>
-                  File uploaded
+
+              </FormField>
+
+              <br>
+
+              <FormField>
+                <template #label>
+                  E-mail
+                </template>
+
+                <template #input>
+                  <input class="input" type="email" placeholder="youremail@site.com" v-model="updatedUser.email">
+                </template>
+
+                <template #leftIcon>
+                  <i class="fas fa-envelope"></i>
+                </template>
+                <template #rightIcon>
+                  <i class="fas fa-check"></i>
+                </template>
+
+                <template #error>
+                  <div :class="{ 'is-hidden': validEmail }">
+                    Invalid e-mail
+                  </div>
                 </template>
 
               </FormField>
@@ -181,38 +237,10 @@ function updateData() {
                   <i class="fas fa-check"></i>
                 </template>
 
-                <template #success>
-                  Valid username
-                </template>
                 <template #error>
-                  Invalid username
-                </template>
-
-              </FormField>
-
-              <br>
-
-              <FormField>
-                <template #label>
-                  E-mail
-                </template>
-
-                <template #input>
-                  <input class="input" type="email" placeholder="youremail@site.com" v-model="updatedUser.email">
-                </template>
-
-                <template #leftIcon>
-                  <i class="fas fa-envelope"></i>
-                </template>
-                <template #rightIcon>
-                  <i class="fas fa-check"></i>
-                </template>
-
-                <template #success>
-                  Valid e-mail
-                </template>
-                <template #error>
-                  Invalid e-mail
+                  <div :class="{ 'is-hidden': validUsername }">
+                    Invalid username
+                  </div>
                 </template>
 
               </FormField>
@@ -281,7 +309,7 @@ function updateData() {
                 </template>
 
                 <template #input>
-                  <button class="button" @click="toggleModal();"><strong>Save</strong></button>
+                  <button class="button"><strong>Save</strong></button>
                 </template>
 
               </FormField>
