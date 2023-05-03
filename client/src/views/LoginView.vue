@@ -26,6 +26,9 @@ const login = useLogin(formEmail, formPassword);
 
 // Ensure login information is valid
 function validateData() {
+  // Transform e-mail into a lowercase version
+  formEmail.value = formEmail.value?.toLowerCase();
+
   // Find user in the database by their e-mail
   const userToLogin = users.value.find(u => u.email === formEmail.value)
 

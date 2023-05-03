@@ -50,8 +50,11 @@ const validUsername = ref(true);
 
 // Save updated profile information
 function updateData() { 
-  // Check if the e-mail already exists in the database or if the e-mail matches the specifications; always allow a user to reclaim any case variation of their current email
-  if (updatedUser.value.email.toLowerCase() != session.user?.email.toLowerCase() && (users.value.find(u => u.email.toLowerCase() === updatedUser.value.email.toLowerCase()) || !/^[^@]*@[^@.]*\.[^@.]*$/.test(updatedUser.value.email))) {
+  // Transform e-mail into a lowercase form for consistency in the database
+  updatedUser.value.email = updatedUser.value.email.toLowerCase(); 
+
+  // Check if the e-mail already exists in the database or if the e-mail matches the specifications
+  if (updatedUser.value.email != session.user?.email && (users.value.find(u => u.email === updatedUser.value.email) || !/^[^@]*@[^@.]*\.[^@.]*$/.test(updatedUser.value.email))) {
     validEmail.value = false;
     console.log('Invalid e-mail!');
     addMessage('Profile not updated; email invalid', 'danger');

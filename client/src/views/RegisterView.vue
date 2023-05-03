@@ -46,8 +46,11 @@ const newUser = ref<User>({
 
 // Save information about a new user to the database
 function updateData() {
+  // Transform e-mail into a lowercase form for consistency in the database
+  newUser.value.email = newUser.value.email.toLowerCase(); 
+
   // Check if the e-mail already exists in the database or if the e-mail matches the specifications
-  if (users.value.find(u => u.email.toLowerCase() === newUser.value.email.toLowerCase()) || !/^[^@]*@[^@.]*\.[^@.]*$/.test(newUser.value.email)) {
+  if (users.value.find(u => u.email === newUser.value.email) || !/^[^@]*@[^@.]*\.[^@.]*$/.test(newUser.value.email)) {
     validEmail.value = false;
     console.log('Invalid e-mail!');
     addMessage('User not created; email invalid', 'danger');
