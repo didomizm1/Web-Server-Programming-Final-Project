@@ -118,7 +118,7 @@ function computations() {
             <template #distance>{{ computedData[i].distance }} Miles</template>
             <template #duration>{{ computedData[i].duration }} Minutes</template>
             <template #pace>{{ computedData[i].pace }} MPH</template>
-            <template #calories>{{ computedData[i].calories }} Calories Burned</template>
+            <template #calories>{{ computedData[i].calories }} Calories</template>
         </StatsBox>
     </div>
 
