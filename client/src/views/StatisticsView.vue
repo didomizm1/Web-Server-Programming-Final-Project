@@ -4,6 +4,7 @@ import { useSession } from '../model/session';
 import { getExercises, type Exercise } from '../model/exercises';
 import { getWorkouts, type Workout } from '../model/workouts';
 import Banner from '../components/Banner.vue';
+import PopupMessage from '../components/PopupMessage.vue';
 import StatsBox from '../components/StatsBox.vue';
 
 // Reactive session object
@@ -105,8 +106,13 @@ function computations() {
         </template>
     </Banner>
 
+    <PopupMessage v-if="exercises.length == 0">
+        <template #header>No Statistics Available!</template>
+        <template #body>To view statistics about your activity, navigate to the exercises page and enter information about your workouts!</template>
+    </PopupMessage>
+
     <!-- Statistics for each date where a user posted an exercise -->
-    <div class="container" v-for="date, i in keys">
+    <div class="container stats-container" v-for="date, i in keys">
         <StatsBox>
             <template #date>{{ date }}</template>
             <template #distance>{{ computedData[i].distance }} Miles</template>
@@ -119,7 +125,7 @@ function computations() {
 </template>
 
 <style scoped>
-.container {
+.stats-container {
   margin-left: 10vw;
   margin-right: 10vw;
 }

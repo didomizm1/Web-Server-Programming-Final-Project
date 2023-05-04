@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import PopupMessage from '@/components/PopupMessage.vue';
+import PopupMessage from '../components/PopupMessage.vue';
 import Banner from '../components/Banner.vue';
 </script>
 
