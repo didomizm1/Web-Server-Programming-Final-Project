@@ -2,7 +2,7 @@
 import { ref } from 'vue';
 import { loadScript, rest } from '../model/myFetch';
 import { addMessage, useLogin } from '../model/session';
-import { type User, getUsers } from '../model/users';
+import { type User, getUsers, createUser } from '../model/users';
 import Banner from '../components/Banner.vue';
 import PopupMessage from '../components/PopupMessage.vue';
 import PageBox from '../components/PageBox.vue';
@@ -44,9 +44,57 @@ function validateData() {
   }
 }
 
+// Ref to hold Google user profile info
+const googleProfile = ref();
+
+// Helper function which handles the Google login process
+function googleLoginProcess() {
+  // Google E-mail
+  const googleEmail = googleProfile.value.emailAddresses[0].value.toLowerCase();
+
+  // Current date
+  const date = new Date();
+
+  // Set e-mail and password refs for Google login
+  formEmail.value = googleEmail;
+  formPassword.value = "";
+
+  // If user with Google e-mail is not already in the database, register them as a new user
+  if (!users.value.find(u => u.email === googleEmail)) {
+    const googleNames = googleProfile.value.names[0];
+    const googleBirthday = googleProfile.value.birthdays[0].date;
+
+    // New user object
+    const newUser = {
+      username: googleNames.displayName.replace(/[^0-9a-z]/gi, '').substring(0, 16).padEnd(8, '0'),
+      password: "",
+      email: googleEmail,
+      firstName: googleNames.givenName,
+      lastName: googleNames.familyName,
+      birthday: `${googleBirthday.year}-${(googleBirthday.month).toString().padStart(2, '0')}-${(googleBirthday.day).toString().padStart(2, '0')}`,
+      friendsUserIDs: [],
+      role: "user",
+      joinDate: `${date.getFullYear()}-${(date.getMonth() + 1).toString().padStart(2, '0')}-${date.getDay().toString().padStart(2, '0')}`,
+    } as User;
+
+    // Create new user
+    createUser(newUser).then((data) => {
+      console.log(data);
+      addMessage('New user created', 'success');
+      
+      // Proceed to log in
+      login();
+    });
+  } else {
+    // User with Google e-mail already exists, so simply log them in
+    login();
+  }
+}
+
 // Google login
 async function googleLogin()
 {
+  // Get info
   await loadScript('https://accounts.google.com/gsi/client', 'google-login');
   
   const client = google.accounts.oauth2.initTokenClient({
@@ -64,6 +112,10 @@ async function googleLogin()
         }
       );
       console.log(me);
+      googleProfile.value = me;
+
+      // Call helper function to handle the login process
+      googleLoginProcess();
     },
   });
   client.requestAccessToken();
