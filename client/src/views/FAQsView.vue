@@ -3,6 +3,10 @@ import Banner from '../components/Banner.vue';
 import PageBox from '../components/PageBox.vue';
 import QuestionAnswer from '../components/QuestionAnswer.vue';
 import SiteLogo from '../components/SiteLogo.vue';
+
+// Save current page
+localStorage.setItem('currentPage', '/faqs');
+
 </script>
 
 <template>

@@ -39,6 +39,9 @@ function validateData() {
     console.log("E-mail or password invalid");
     addMessage('Not logged in; e-mail or password invalid', 'danger');
   } else {
+    // Save current page
+    localStorage.setItem('currentPage', '/login');
+    
     // Proceed to log in
     login();
   }

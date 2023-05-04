@@ -1,6 +1,10 @@
 <script setup lang="ts">
 import SiteLogo from '../components/SiteLogo.vue';
 import Quote from '../components/Quote.vue'
+
+// Save current page
+localStorage.setItem('currentPage', '/');
+
 </script>
 
 <template>

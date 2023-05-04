@@ -1,6 +1,10 @@
 <script setup lang="ts">
 import PopupMessage from '../components/PopupMessage.vue';
 import Banner from '../components/Banner.vue';
+
+// Save current page
+localStorage.setItem('currentPage', '/meals');
+
 </script>
 
 <template>

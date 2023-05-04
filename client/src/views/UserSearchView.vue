@@ -5,6 +5,9 @@ import { getUsers, updateUser, type User, type UserPackage } from '../model/user
 import Banner from '../components/Banner.vue';
 import ProfilePicture from '../components/ProfilePicture.vue';
 
+// Save current page
+localStorage.setItem('currentPage', '/user-search');
+
 // Reactive session object
 const session = useSession();
 

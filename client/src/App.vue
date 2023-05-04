@@ -1,7 +1,28 @@
 <script setup lang="ts">
 import { RouterView } from 'vue-router';
+import { ref } from 'vue';
+import { useLogin } from './model/session';
 import Navbar from './components/Navbar.vue';
 import FooterNav from './components/FooterNav.vue';
+
+// Refs to hold information about a user's login information
+const userEmail = ref<string>();
+const userPassword = ref<string>();
+
+// Login function
+const login = useLogin(userEmail, userPassword);
+
+// Session from localStorage
+const storedEmail = localStorage.getItem('email');
+const storedPassword = localStorage.getItem('password');
+
+// Check for a logged in user on page reload
+if (storedEmail && storedPassword) { 
+  userEmail.value = storedEmail;
+  userPassword.value = storedPassword;
+  login();
+}
+
 </script>
 
 <template>

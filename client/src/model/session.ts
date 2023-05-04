@@ -47,7 +47,7 @@ export function api(url: string, data?: any, method?: string, headers?: any) {
 export function useLogin(emailRef: Ref<string | undefined>, passwordRef: Ref<string | undefined>) {
     const router = useRouter();
     
-    // Assigns user data to the session and redirects to the home page
+    // Assigns user data to the session and redirects
     return async function() {
         const response = await api("users/login", {
             "email": emailRef.value,
@@ -59,9 +59,20 @@ export function useLogin(emailRef: Ref<string | undefined>, passwordRef: Ref<str
             addMessage("User not found", "danger");
             return;
         }
+        
+        localStorage.setItem('email', emailRef.value as string);
+        localStorage.setItem('password', passwordRef.value as string);
+
         session.user.token = response.data.token;
 
-        router.push(session.redirectUrl ?? "/");
+        const currentPage = localStorage.getItem('currentPage');
+
+        if (currentPage && currentPage != "/login") {
+            router.push(currentPage);
+        }
+        else {
+            router.push(session.redirectUrl ?? "/");
+        }
         session.redirectUrl = null;
     }
 }
@@ -74,6 +85,8 @@ export function useLogout() {
     return function() {
         console.log({ router });
         session.user = null;
+        localStorage.removeItem('email');
+        localStorage.removeItem('password');
         router.push("/login");
     }
 }

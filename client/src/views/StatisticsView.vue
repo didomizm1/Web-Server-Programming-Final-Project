@@ -7,6 +7,9 @@ import Banner from '../components/Banner.vue';
 import PopupMessage from '../components/PopupMessage.vue';
 import StatsBox from '../components/StatsBox.vue';
 
+// Save current page
+localStorage.setItem('currentPage', '/statistics');
+
 // Reactive session object
 const session = useSession();
 

@@ -10,6 +10,9 @@ import ActivityBox from '../components/ActivityBox.vue';
 import ProfilePicture from '../components/ProfilePicture.vue';
 import Image from '../components/Image.vue';
 
+// Save current page
+localStorage.setItem('currentPage', '/friends');
+
 // Reactive session object
 const session = useSession();
 

@@ -9,6 +9,9 @@ import FormField from '../components/FormField.vue';
 import SiteLogo from '../components/SiteLogo.vue';
 import PageBox from '../components/PageBox.vue';
 
+// Save current page
+localStorage.setItem('currentPage', '/register');
+
 // Reactive session object
 const session = useSession();
 

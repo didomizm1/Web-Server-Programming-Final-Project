@@ -11,6 +11,9 @@ import Image from '../components/Image.vue';
 import FormField from '../components/FormField.vue';
 import FileFormField from '../components/FileFormField.vue';
 
+// Save current page
+localStorage.setItem('currentPage', '/exercises');
+
 // Reactive session object
 const session = useSession();
 

@@ -35,7 +35,7 @@ export default router
 // Function to only allow access to certain pages if a user is logged in
 function secureRoute (to: RouteLocationNormalized, from: RouteLocationNormalized, next: NavigationGuardNext) {
   const session = useSession();
-  if (session.user) {
+  if (session.user || (localStorage.getItem('email') && localStorage.getItem('password'))) {
       next()
   } else { 
       next('/login')

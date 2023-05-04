@@ -8,6 +8,9 @@ import CustomLevel from '../components/CustomLevel.vue';
 import FormField from '../components/FormField.vue';
 import FileFormField from '../components/FileFormField.vue';
 
+// Save current page
+localStorage.setItem('currentPage', '/profile');
+
 // Reactive session object
 const session = useSession();
 
