@@ -62,6 +62,9 @@ function googleLoginProcess() {
   formEmail.value = googleEmail;
   formPassword.value = "";
 
+  // Save current page
+  localStorage.setItem('currentPage', '/login');
+
   // If user with Google e-mail is not already in the database, register them as a new user
   if (!users.value.find(u => u.email === googleEmail)) {
     const googleNames = googleProfile.value.names[0];
