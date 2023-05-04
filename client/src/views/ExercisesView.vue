@@ -44,6 +44,9 @@ function updateData() {
   newExercise.value.userID = session.user!._id as string;
   newExercise.value.workoutID = workouts.value.find(w => w.name === newExerciseWorkoutName.value)!._id;
 
+  // Add new exercise to exercises ref
+  exercises.value.push(newExercise.value);
+
   // Update Database
   createExercise(newExercise.value).then((data) => {
     console.log(data);
