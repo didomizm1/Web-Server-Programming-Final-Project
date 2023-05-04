@@ -52,12 +52,13 @@ async function googleLogin()
   const client = google.accounts.oauth2.initTokenClient({
     client_id: import.meta.env.VITE_GOOGLE_CLIENT_ID,
     scope: 'https://www.googleapis.com/auth/userinfo.email \
-            https://www.googleapis.com/auth/userinfo.profile',
+            https://www.googleapis.com/auth/userinfo.profile \
+            https://www.googleapis.com/auth/user.birthday.read',
     callback: async (tokenResponse) => {
       console.log(tokenResponse);
 
       const me = await rest(
-        'https://people.googleapis.com/v1/people/me?personFields=names,emailAddresses',
+        'https://people.googleapis.com/v1/people/me?personFields=names,emailAddresses,birthdays',
         null, undefined, {
           "Authorization": "Bearer " + tokenResponse.access_token
         }
