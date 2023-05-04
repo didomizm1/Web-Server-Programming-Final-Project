@@ -240,6 +240,9 @@ function updateData() {
                   <i class="fas fa-check"></i>
                 </template>
 
+                <template #help>
+                  Must be between 8 and 16 characters long (letters or numbers only)
+                </template>
                 <template #error>
                   <div :class="{ 'is-hidden': validUsername }">
                     Invalid username

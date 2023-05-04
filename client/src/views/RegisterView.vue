@@ -4,8 +4,8 @@ import { useRouter } from "vue-router";
 import { addMessage, useSession } from '../model/session';
 import { createUser, getUsers, type User } from '../model/users';
 import Banner from '../components/Banner.vue';
-import FormField from '../components/FormField.vue';
 import PopupMessage from '../components/PopupMessage.vue';
+import FormField from '../components/FormField.vue';
 import SiteLogo from '../components/SiteLogo.vue';
 import PageBox from '../components/PageBox.vue';
 

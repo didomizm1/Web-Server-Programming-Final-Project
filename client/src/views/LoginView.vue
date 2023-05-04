@@ -4,9 +4,9 @@ import { loadScript, rest } from '../model/myFetch';
 import { addMessage, useLogin } from '../model/session';
 import { type User, getUsers } from '../model/users';
 import Banner from '../components/Banner.vue';
+import PopupMessage from '../components/PopupMessage.vue';
 import PageBox from '../components/PageBox.vue';
 import FormField from '../components/FormField.vue';
-import PopupMessage from '../components/PopupMessage.vue';
 import SiteLogo from '../components/SiteLogo.vue';
 
 // Get all users

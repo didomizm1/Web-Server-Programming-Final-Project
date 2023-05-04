@@ -5,6 +5,7 @@ import { getUsers, type User } from '../model/users';
 import { getExercises, type Exercise } from '../model/exercises';
 import { getWorkouts, type Workout } from '../model/workouts';
 import Banner from '../components/Banner.vue';
+import PopupMessage from '../components/PopupMessage.vue';
 import ActivityBox from '../components/ActivityBox.vue';
 import ProfilePicture from '../components/ProfilePicture.vue';
 import Image from '../components/Image.vue';
@@ -39,11 +40,21 @@ getWorkouts().then((data) => {
       Friends
     </template>
     <template #subtitle>
-      View your friends and their activities!
+      View your friends' activities!
     </template>
   </Banner>
+  
+  <!-- Message if no friends have exercises -->
+  <PopupMessage v-if="exercises.length == 0">
+    <template #header>
+      No friend exercises available!
+    </template>
+    <template #body>
+      Sorry, none of your friends have shared their exercises yet! Encourage them to post their activity or add new friends in the user search page to see their workouts!
+    </template>
+  </PopupMessage>
 
-  <div class="container" v-for="exercise, i in exercises">
+  <div class="container activity-container" v-for="exercise, i in exercises">
     <!-- List of a user's exercises -->
     <ActivityBox>
       <template #profilePicture>
@@ -82,7 +93,7 @@ getWorkouts().then((data) => {
 </template>
 
 <style scoped>
-.container {
+.activity-container {
   margin-left: 8vw;
   margin-right: 8vw;
 }
