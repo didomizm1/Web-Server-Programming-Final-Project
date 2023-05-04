@@ -59,7 +59,7 @@ function updateData(friendID: string, mode: string) {
     </Banner>
 
     <!-- Table to display information about available users -->
-    <div class="container">
+    <div class="container mb-6">
         <table class="table is-bordered is-narrow is-fullwidth is-striped is-hoverable">
             <thead>
                 <tr>
