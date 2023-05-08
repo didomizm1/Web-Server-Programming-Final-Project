@@ -14,7 +14,7 @@ localStorage.setItem('currentPage', '/');
     <!-- Quotes -->
     <Quote>
         <template #text>
-            All man are the same except for their belief in their own selves, regardless of what others may think of them
+            All man are the same except for their belief in their own selves, regardless of what others may think of them.
         </template>
         <template #person>
             Miyamoto Musashi
