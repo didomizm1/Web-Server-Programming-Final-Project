@@ -42,3 +42,7 @@ export function createUser(user: User): Promise<DataEnvelope<User>> {
 export function updateUser(userPackage: UserPackage): Promise<DataEnvelope<UserPackage>> {
     return api('users', userPackage, 'PATCH')
 }
+
+export function searchUsers(searchTerm: string): Promise<DataListEnvelope<User>> {
+    return api(`users/search/${searchTerm}`)
+}

@@ -3,6 +3,8 @@ import { ref } from 'vue';
 import { addMessage, useSession } from '../model/session';
 import { getExercises, createExercise, type Exercise } from '../model/exercises';
 import { getWorkouts, type Workout } from '../model/workouts';
+import { getUsers, searchUsers, type User } from '../model/users'
+import AutoComplete from 'primevue/AutoComplete';
 import Banner from '../components/Banner.vue';
 import CustomLevel from '../components/CustomLevel.vue';
 import ActivityBox from '../components/ActivityBox.vue';
@@ -10,6 +12,7 @@ import ProfilePicture from '../components/ProfilePicture.vue';
 import Image from '../components/Image.vue';
 import FormField from '../components/FormField.vue';
 import FileFormField from '../components/FileFormField.vue';
+import { isTemplateSpan } from 'typescript';
 
 // Save current page
 localStorage.setItem('currentPage', '/exercises');
@@ -29,6 +32,12 @@ getWorkouts().then((data) => {
   workouts.value = data.data;
 });
 
+// Get all users
+const users = ref<User[]>([]);
+getUsers().then((data) => {
+    users.value = data.data;
+});
+
 // Add exercise form modal functionality
 const isModalActive = ref(false);
 
@@ -40,6 +49,14 @@ function toggleModal() {
 // Refs to hold form data about a newly created exercise
 let newExercise = ref<Exercise>({} as Exercise);
 let newExerciseWorkoutName = ref("");
+const addedUsersList = ref("");
+const searchedUsers = ref();
+
+async function search(event: { query: string}) {
+  searchUsers(event.query).then((data) => {
+    searchedUsers.value = data.data;
+  });;
+}
 
 // Save new exercise
 function updateData() {
@@ -140,6 +157,16 @@ function updateData() {
           </FormField>
 
           <br>
+
+          <FormField>
+            <template #label>
+              Tag Friends
+            </template>
+          </FormField>
+
+          <AutoComplete v-model="addedUsersList" multiple optionLabel="username" :suggestions="searchedUsers" @complete="search" />
+
+          <br><br><br>
 
           <FormField>
             <template #label>

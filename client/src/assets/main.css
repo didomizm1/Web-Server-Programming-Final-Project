@@ -2,3 +2,5 @@
 @import '@fortawesome/fontawesome-free/css/all.css';
 @import 'https://fonts.cdnfonts.com/css/sf-wasabi-2';
 @import 'https://fonts.cdnfonts.com/css/japanese-brush';
+@import 'primevue/resources/themes/lara-light-indigo/theme.css';
+@import 'primevue/resources/primevue.min.css';

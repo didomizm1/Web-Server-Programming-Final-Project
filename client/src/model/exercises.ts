@@ -11,6 +11,7 @@ export interface Exercise {
     duration: number;
     date: string;
     image?: string;
+    taggedUsers?: string;
 }
 
 // Function to get all exercises
