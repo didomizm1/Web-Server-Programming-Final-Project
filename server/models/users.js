@@ -91,8 +91,10 @@ async function search(searchTerm, page = 1, pageSize = 30) {
     const col = await collection();
     const query = {
         $or: [
-            { name: { $regex: searchTerm, $options: 'i' } },
+            { username: { $regex: searchTerm, $options: 'i' } },
             { email: { $regex: searchTerm, $options: 'i' } },
+            { firstName: { $regex: searchTerm, $options: 'i' } },
+            { lastName: { $regex: searchTerm, $options: 'i' } }
         ]
     };
 
